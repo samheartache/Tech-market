@@ -9,7 +9,7 @@
     <h1>Добро пожаловать в TECH MARKET</h1>
     <p>Лучший сайт для покупки компьютерной техники</p>
     <div class='hero-buttons'>
-      <a href="motherboards.html" class="hero-button">Перейти к товарам</a>
+      <a href='{% url "products:all_products" %}' class="hero-button">Перейти к товарам</a>
       <a href="{% url "main:about" %}" class="hero-button">О нас</a>
     </div>
   </div>

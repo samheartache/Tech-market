@@ -17,7 +17,9 @@ html {
 body {
     background: url('../imgs/blur_bg.jpg') 0 0 /cover fixed;
     backdrop-filter: blur(30px);
-    min-height: 100vh;
+    height: 100vh;
+    position: absolute;
+    top: 0;
 }
 
 
@@ -92,6 +94,42 @@ header {
     align-items: center;
     justify-content: space-between;
     flex-wrap: wrap;
+}
+
+aside {
+    min-height: 100vh;
+    border-radius: 10px;
+    position: fixed;
+    min-width: 250px;
+    max-width: 225px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(40px);
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
+    margin-left: 30px;
+    margin-top: 60px;
+}
+
+.aside__nav {
+    display: block;
+}
+
+.headline {
+    color: #fff;
+    margin: 30px 5px 20px 20px;
+    font-size: 18px;
+}
+
+.aside-element {
+    display: block;
+    padding: 50px;
+    line-height: 30px;
+    font-size: 18px;
+    color: #fff;
+    transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.aside-element:hover {
+    background: rgba(255, 255, 255, 0.1);
 }
 
 footer {
