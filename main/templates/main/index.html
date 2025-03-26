@@ -1,14 +1,17 @@
 {% extends "main/base.html" %}
 {% load static %}
 {% block css %}
-    <link rel="stylesheet" href='{% static "css/main.css" %}' />
+<link rel="stylesheet" href='{% static "css/index.css" %}' />
 {% endblock  %}
 {% block content %}
 <section class="hero">
   <div class="hero-content">
     <h1>Добро пожаловать в TECH MARKET</h1>
     <p>Лучший сайт для покупки компьютерной техники</p>
-    <a href="motherboards.html" class="hero-button">Перейти к товарам</a>
+    <div class='hero-buttons'>
+      <a href="motherboards.html" class="hero-button">Перейти к товарам</a>
+      <a href="{% url "main:about" %}" class="hero-button">О нас</a>
+    </div>
   </div>
 </section>
 <section class="features">

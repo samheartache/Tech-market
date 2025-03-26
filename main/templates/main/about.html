@@ -1,0 +1,18 @@
+{% extends "main/base.html" %}
+{% load static %}
+{% block css %}
+<link rel="stylesheet" href='{% static "css/about.css" %}' />
+{% endblock css %}
+{% block content %}
+<main>
+    <div class='about_block'>
+        <div class='headline about_text'>
+            О нас
+        </div>
+        <div class='about_text'>
+            {% lorem 5 b random %}
+        </div>
+    </div>
+</main>
+{% endblock content %}
+
