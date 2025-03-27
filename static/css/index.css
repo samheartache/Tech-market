@@ -1,3 +1,9 @@
+body {
+    background: url('../imgs/blur_bg.jpg') 0 0 /cover fixed;
+    backdrop-filter: blur(30px);
+    min-height: 100vh;
+}
+
 .hero {
     background: url('../imgs/hero-bg.jpg') no-repeat center center / cover;
     height: 75vh;

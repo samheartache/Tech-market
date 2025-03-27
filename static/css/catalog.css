@@ -1,3 +1,10 @@
+body {
+    background: url('../imgs/logreg_bg.jpeg') 0 0 /cover fixed;
+    height: 100vh;
+    position: absolute;
+    top: 0;
+}
+
 main {
     min-height: 100vh;
     min-width: 300px;

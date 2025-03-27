@@ -3,6 +3,14 @@ html, body {
     flex-direction: column;
 }
 
+body {
+    background: url('../imgs/logreg_bg.jpeg') 0 0 /cover fixed;
+    /* backdrop-filter: blur(30px); */
+    height: 100vh;
+    position: absolute;
+    top: 0;
+}
+
 main {
     flex-grow: 1;
     padding-top: 80px;
@@ -33,6 +41,7 @@ main {
     font-size: 40px;
     font-weight: bold;
     float: left;
+    color: black;
 }
 
 footer {
