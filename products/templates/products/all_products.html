@@ -18,7 +18,7 @@
   {% for product in products %}
   <article>
     <section>
-      <div class="product_image"><img src="" alt=""></div>
+      <div class="product_image"><img src="{{ product.image.url }}" alt=""></div>
       <div class="product_desc">
         <div class="product_name desc_el">
           {{ product.name }}

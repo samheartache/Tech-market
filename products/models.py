@@ -3,10 +3,10 @@ from django.db import models
 
 class Product(models.Model):
     name = models.CharField(unique=True, max_length=200, verbose_name='Название')
-    slug = models.SlugField(unique=True, blank=True, max_length=20, verbose_name='URL')
-    description = models.TextField(default='У товара пока нет описания', max_length=500, verbose_name='Описание')
+    slug = models.SlugField(unique=True, blank=True, max_length=50, verbose_name='URL')
+    description = models.TextField(default='У товара пока нет описания', blank=True, null=True, max_length=500, verbose_name='Описание')
     price = models.DecimalField(default=0.0, max_digits=10, decimal_places=2, verbose_name='Цена')
-    image = models.ImageField(upload_to=None, blank=True, null=True, verbose_name='Изображение')
+    image = models.ImageField(upload_to='product_img', blank=True, null=True, verbose_name='Изображение')
     category = models.ForeignKey('Category', verbose_name='Категория', on_delete=models.CASCADE)
     
     def __str__(self):
