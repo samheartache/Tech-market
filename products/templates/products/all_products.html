@@ -1,0 +1,38 @@
+{% extends "main/base.html" %}
+{% load static %}
+{% block css %}
+  <link rel="stylesheet" href='{% static "css/catalog.css" %}' />
+{% endblock %}
+{% block aside %}
+  <aside>
+    <nav class="aside__nav">
+      <div class="headline"><h1>Категории товаров</h1></div>
+      {% for category in categories %}
+      <a href="motherboards.html" class="aside-element">{{ category.name }}</a>
+      {% endfor %}
+    </nav>
+  </aside>
+{% endblock aside %}
+{% block content %}
+<main>
+  {% for product in products %}
+  <article>
+    <section>
+      <div class="product_image"><img src="" alt=""></div>
+      <div class="product_desc">
+        <div class="product_name desc_el">
+          {{ product.name }}
+        </div>
+        <div class="product_below desc_el">
+          <div class="product_price">{{ product.price }}</div>
+          <div class="buttons">
+            <button>Добавить в корзину</button>
+            <button>Заказать</button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </article>
+  {% endfor %}
+</main>
+{% endblock content %}

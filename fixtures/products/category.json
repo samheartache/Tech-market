@@ -1,0 +1,32 @@
+[
+    {
+        "model": "products.category",
+        "pk": 1,
+        "fields": {"name": "Все товары", "slug": "all-products"}
+    },
+    {
+        "model": "products.category",
+        "pk": 2,
+        "fields": {"name": "Материнские платы", "slug": "motherboards"}
+    },
+    {
+        "model": "products.category",
+        "pk": 3,
+        "fields": {"name": "Видеокарты", "slug": "graphicalcards"}
+    },
+    {
+        "model": "products.category",
+        "pk": 4,
+        "fields": {"name": "Процессоры", "slug": "processors"}
+    },
+    {
+        "model": "products.category",
+        "pk": 5,
+        "fields": {"name": "Мониторы", "slug": "monitors"}
+    },
+    {
+        "model": "products.category",
+        "pk": 6,
+        "fields": {"name": "Клавиатуры", "slug": "keyboards"}
+    }
+]
