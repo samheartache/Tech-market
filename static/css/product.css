@@ -1,0 +1,85 @@
+body {
+  background: url("../imgs/logreg_bg.jpeg") 0 0 / cover fixed;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+}
+
+.product-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 80vw;
+  margin: 0 200px;
+  background: #fff;
+}
+
+.desc {
+    display: flex;
+    flex-direction: column;
+    background: rgb(255, 255, 255);
+}
+
+.else {
+    background: #ffffff;
+}
+
+.product-image img {
+  max-width: 450px;
+  height: auto;
+  border-radius: 12px;
+}
+
+.product-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex-grow: 1;
+}
+
+.product-name {
+  font-size: 32px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.product-description {
+  font-size: 18px;
+  color: #555;
+  margin-bottom: 30px;
+}
+
+.product-price {
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.product-buttons {
+  display: flex;
+  margin: 20px;
+}
+
+.product-buttons button {
+  padding: 15px 25px;
+  font-size: 18px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.add-to-cart {
+  background: #ffb703;
+  color: #fff;
+}
+
+.order-now {
+  background: #219ebc;
+  color: #fff;
+}
+
+.product-buttons button:hover {
+  opacity: 0.8;
+}

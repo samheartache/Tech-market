@@ -18,13 +18,15 @@
   {% for product in products %}
   <article>
     <section>
+      {% if product.image %}
       <div class="product_image"><img src="{{ product.image.url }}" alt=""></div>
+      {% endif %}
       <div class="product_desc">
         <div class="product_name desc_el">
-          {{ product.name }}
+          <a href="{% url "products:product" product.slug %}">{{ product.name }}</a>
         </div>
         <div class="product_below desc_el">
-          <div class="product_price">{{ product.price }}</div>
+          <div class="product_price">{{ product.price }} ₽</div>
           <div class="buttons">
             <button>Добавить в корзину</button>
             <button>Заказать</button>

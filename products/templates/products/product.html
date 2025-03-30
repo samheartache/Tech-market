@@ -1,0 +1,23 @@
+{% extends "main/base.html" %}
+{% load static %}
+{% block css %}
+  <link rel="stylesheet" href='{% static "css/product.css" %}' />
+{% endblock %}
+{% block content %}
+<div class="product-container">
+    <div class="product-image">
+      <img src="{{ product.image.url }}" alt="{{ product.name }}">
+    </div>
+    <div class="desc">
+        <div class="product-name">{{ product.name }}</div>
+        <div class="product-description">{{ product.description }}</div>
+        <div class="else">
+            <div class="product-price">{{ product.price }} ₽</div>
+            <div class="buttons">
+            <button>Добавить в корзину</button>
+            <button>Заказать</button>
+        </div>
+    </div>
+    </div>
+  </div>
+{% endblock %}
