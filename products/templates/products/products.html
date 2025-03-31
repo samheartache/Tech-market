@@ -36,5 +36,38 @@
     </section>
   </article>
   {% endfor %}
+  {% if products.paginator.num_pages > 1 %}
+  <nav class="paginaton__nav">
+    <ul>
+        <li class="page_item {% if not products.has_previous %}disabled{% endif %}">
+            <a href="{% if products.has_previous %}
+            ?page={{ products.previous_page_number }}
+            {% else %}
+            #
+            {% endif %}"
+             class="page_url">Назад</a>
+        </li>
+        {% for page in products.paginator.page_range %}
+        {% if page == 1 or page == products.paginator.num_pages or page >= products.number|add:-2 and page <= products.number|add:2 %}
+          <li class="page_item {% if products.number == page %}disabled{% endif %}">
+            <a href="?page={{ page }}" class="page_url">{{ page }}</a>
+          </li>
+        {% elif page == products.number|add:-3 or page == products.number|add:3 %}
+          <li class="page_item disabled">
+            <span class="page_url">...</span>
+          </li>
+        {% endif %}
+      {% endfor %}      
+        <li class="page_item {% if not products.has_next %}disabled{% endif %}">
+          <a href="{% if products.has_next %}
+          ?page={{ products.previous_next_number }}
+          {% else %}
+          #
+          {% endif %}"
+           class="page_url">След</a>
+      </li>
+    </ul>
+</nav>
+{% endif %}
 </main>
 {% endblock content %}

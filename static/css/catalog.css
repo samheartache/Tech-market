@@ -125,6 +125,59 @@ section:hover {
     transform: scale(0.96);
 }
 
+
+.paginaton__nav {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    margin-bottom: 40px;
+}
+
+.paginaton__nav ul {
+    list-style: none;
+    display: flex;
+    gap: 10px;
+    padding: 0;
+}
+
+.page_item {
+    display: inline-block;
+    background: #fff;
+    border-radius: 5px;
+}
+
+.page_url {
+    display: block;
+    padding: 10px 15px;
+    text-decoration: none;
+    color: #000000;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+.page_item:hover {
+    background-color: #0d8dd7;
+    border-color: #0d8dd7;
+}
+
+.page_url:hover {
+    color: #fff;
+}
+
+.page_item.disabled .page_url {
+    color: #bbb;
+    border-color: #ddd;
+    border-radius: 5px;
+    cursor: not-allowed;
+    background-color: #f8f9fa;
+}
+
+.page_item.active .page_url {
+    background-color: #0d8dd7;
+    color: white;
+    border-color: #0d8dd7;
+}
+
 @media (max-width: 1200px) {
     .product_name {
         font-size: 24px;
@@ -174,6 +227,7 @@ section:hover {
         gap: 10px;
     }
 }
+
 
 @media (max-width: 500px) {
     .product_name {

@@ -16,6 +16,7 @@ class Product(models.Model):
         db_table = 'product'
         verbose_name = 'Товар'
         verbose_name_plural = 'Товары'
+        ordering = ['id']
 
 
 class Category(models.Model):
