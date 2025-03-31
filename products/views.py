@@ -1,15 +1,18 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_list_or_404
 from products.models import Category, Product
 
-def all_products(request):
+def get_products(request, category_slug):
     categories = Category.objects.all()
-    products = Product.objects.all()
+    if category_slug == 'all':
+        products = Product.objects.all()
+    else:
+        products = get_list_or_404(Product.objects.filter(category__slug=category_slug))
     context = {
         'title': 'Все товары',
         'categories': categories,
         'products': products
     }
-    return render(request, 'products/all_products.html', context)
+    return render(request, 'products/products.html', context)
 
 def product(request, product_slug):
     product = Product.objects.get(slug=product_slug)

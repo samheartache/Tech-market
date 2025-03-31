@@ -8,7 +8,7 @@
     <nav class="aside__nav">
       <div class="headline"><h1>Категории товаров</h1></div>
       {% for category in categories %}
-      <a href="motherboards.html" class="aside-element">{{ category.name }}</a>
+      <a href="{% url "products:products" category.slug %}" class="aside-element">{{ category.name }}</a>
       {% endfor %}
     </nav>
   </aside>
