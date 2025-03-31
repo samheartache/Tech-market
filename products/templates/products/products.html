@@ -3,15 +3,43 @@
 {% block css %}
   <link rel="stylesheet" href='{% static "css/catalog.css" %}' />
 {% endblock %}
+{% block js %}
+<script src='{% static "js/aside.js" %}' defer></script>
+{% endblock %}
 {% block aside %}
-  <aside>
-    <nav class="aside__nav">
-      <div class="headline"><h1>Категории товаров</h1></div>
-      {% for category in categories %}
-      <a href="{% url "products:products" category.slug %}" class="aside-element">{{ category.name }}</a>
-      {% endfor %}
-    </nav>
-  </aside>
+<aside>
+  <nav class="aside__nav">
+      <div class="headline dropdown-toggle" onclick="toggleDropdown('category-list')">
+          <h1>Категории товаров   ▼</h1>
+      </div>
+      <div id="category-list" class="dropdown-content">
+          {% for category in categories %}
+          <a href="{% url 'products:products' category.slug %}" class="aside-element">{{ category.name }}</a>
+          {% endfor %}
+      </div>
+
+      <div class="headline dropdown-toggle" onclick="toggleDropdown('price-filter')">
+          <h1>Фильтрация   ▼</h1>
+      </div>
+      <div id="price-filter" class="dropdown-content">
+        <form method="GET" action="" class="filter_form">
+          <label>
+            <input type="radio" name="sort_price" class="filter_choice"value="default">
+            По умолчанию
+          </label><br>
+          <label>
+            <input type="radio" name="sort_price" class="filter_choice" value="asc">
+            Сначала дешёвые
+          </label><br>
+          <label>
+            <input type="radio" name="sort_price" class="filter_choice" value="desc">
+            Сначала дорогие
+          </label><br>
+          <button type="submit" class="filter-btn">Применить</button>
+        </form>
+      </div>
+  </nav>
+</aside>
 {% endblock aside %}
 {% block content %}
 <main>
