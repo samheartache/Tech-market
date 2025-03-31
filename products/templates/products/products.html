@@ -1,5 +1,6 @@
 {% extends "main/base.html" %}
 {% load static %}
+{% load product_tags %}
 {% block css %}
   <link rel="stylesheet" href='{% static "css/catalog.css" %}' />
 {% endblock %}
@@ -22,17 +23,18 @@
           <h1>Фильтрация   ▼</h1>
       </div>
       <div id="price-filter" class="dropdown-content">
-        <form method="GET" action="" class="filter_form">
+        <form method="GET" action="{% url "products:products" slug %}" class="filter_form">
           <label>
-            <input type="radio" name="sort_price" class="filter_choice"value="default">
+            <input type="radio" name="sort_way" class="filter_choice" 
+            value="default" {% if not request.GET.sort_way or request.GET.sort_way == 'default' %}checked{% endif %}>
             По умолчанию
           </label><br>
           <label>
-            <input type="radio" name="sort_price" class="filter_choice" value="asc">
+            <input type="radio" name="sort_way" class="filter_choice" value="price" {% if request.GET.sort_way == 'price' %}checked{% endif %}>
             Сначала дешёвые
           </label><br>
           <label>
-            <input type="radio" name="sort_price" class="filter_choice" value="desc">
+            <input type="radio" name="sort_way" class="filter_choice" value="-price" {% if request.GET.sort_way == '-price' %}checked{% endif %}>
             Сначала дорогие
           </label><br>
           <button type="submit" class="filter-btn">Применить</button>
@@ -69,7 +71,7 @@
     <ul>
         <li class="page_item {% if not products.has_previous %}disabled{% endif %}">
             <a href="{% if products.has_previous %}
-            ?page={{ products.previous_page_number }}
+            ?{% proper_url page=products.previous_page_number %}
             {% else %}
             #
             {% endif %}"
@@ -78,7 +80,7 @@
         {% for page in products.paginator.page_range %}
         {% if page == 1 or page == products.paginator.num_pages or page >= products.number|add:-2 and page <= products.number|add:2 %}
           <li class="page_item {% if products.number == page %}disabled{% endif %}">
-            <a href="?page={{ page }}" class="page_url">{{ page }}</a>
+            <a href="?{% proper_url page=page %}" class="page_url">{{ page }}</a>
           </li>
         {% elif page == products.number|add:-3 or page == products.number|add:3 %}
           <li class="page_item disabled">
@@ -88,7 +90,7 @@
       {% endfor %}      
         <li class="page_item {% if not products.has_next %}disabled{% endif %}">
           <a href="{% if products.has_next %}
-          ?page={{ products.previous_next_number }}
+          ?{% proper_url page=products.next_page_number %}
           {% else %}
           #
           {% endif %}"
