@@ -13,7 +13,7 @@ def get_products(request, category_slug):
     if category_slug == 'all':
         products = Product.objects.all()
     else:
-        products = get_list_or_404(Product.objects.filter(category__slug=category_slug))
+        products = Product.objects.filter(category__slug=category_slug)
     
     if sort_way and sort_way != 'default':
         products = products.order_by(sort_way)
