@@ -16,6 +16,7 @@
         <div class="logo"><a href='{% url "main:index" %}'>TECH MARKET</a></div>
         <nav class="menu">
           <ul>
+            {% block search %}{% endblock %}
             <li class="menu-element"><a href='{% url "main:index" %}'>ГЛАВНАЯ</a></li>
             <li class="menu-element"><a href="cart.html">КОРЗИНА</a></li>
             <li class="menu-element"><a href="signup.html">РЕГИСТРАЦИЯ</a></li>

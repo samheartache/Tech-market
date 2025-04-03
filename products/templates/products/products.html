@@ -7,6 +7,14 @@
 {% block js %}
 <script src='{% static "js/aside.js" %}' defer></script>
 {% endblock %}
+{% block search %}
+<li>
+  <form class="search_form" role='search' action='{% url "products:search" %}' method='get'>
+    <input class='search_input' type='search' name='q' placeholder='Поиск'>
+    <button class='search_button' type='submit'>Искать</button>
+  </form>
+</li>
+{% endblock%}
 {% block aside %}
 <aside>
   <nav class="aside__nav">
@@ -23,7 +31,10 @@
           <h1>Фильтрация   ▼</h1>
       </div>
       <div id="price-filter" class="dropdown-content">
-        <form method="GET" action="{% url "products:products" slug %}" class="filter_form">
+        <form method="GET" action="{% if request.GET.q %}{% url "products:search" %}{% else %}{% url "products:products" slug %}{% endif %}" class="filter_form">
+          {% if  request.GET.q %}
+          <input type='hidden' name='q' value='{{ request.GET.q }}'>
+          {% endif %}
           <label>
             <input type="radio" name="sort_way" class="filter_choice" 
             value="default" {% if not request.GET.sort_way or request.GET.sort_way == 'default' %}checked{% endif %}>
