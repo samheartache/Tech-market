@@ -66,7 +66,15 @@
       {% endif %}
       <div class="product_desc">
         <div class="product_name desc_el">
-          <a href="{% url "products:product" product.slug %}">{{ product.name }}</a>
+          <a href="{% url "products:product" product.slug %}">
+            {% autoescape off %}
+              {% if  product.headline%}
+              {{ product.headline }}
+              {% else %}
+              {{ product.name }}
+              {% endif %}
+            {% endautoescape %}
+          </a>
         </div>
         <div class="product_below desc_el">
           <div class="product_price">{{ product.price }} ₽</div>

@@ -5,9 +5,12 @@ from products.models import Product
 
 
 def query_handler(query):
+
     vector = SearchVector('name', 'description')
     query = SearchQuery(query)
     result =  Product.objects.annotate(rank=SearchRank(vector, query)).order_by('-rank').filter(rank__gt=0)
     
-    result = result.annotate(headline=SearchHeadline('name', query, start_sel='<span style="background_color: yellow;"', stop_sel='</span>')
+    result = result.annotate(headline=SearchHeadline('name', query, start_sel='<span style="background-color: yellow;">', stop_sel='</span>'))
+    result = result.annotate(bodyline=SearchHeadline('description', query, start_sel='<span style="background-color: yellow;">', stop_sel='</span>'))
+
     return result
