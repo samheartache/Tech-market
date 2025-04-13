@@ -1,14 +1,8 @@
 from django.db.models import Q
+from django.contrib.postgres.search import SearchVector
 
 from products.models import Product
 
 
 def query_handler(query):
-    keywords = [word for word in query.split()]
-    q_objects = Q()
-
-    for word in keywords:
-        q_objects |= Q(name__icontains=word)
-        q_objects |= Q(description__contains=word)
-    
-    return Product.objects.filter(q_objects)
+    return Product.objects.annotate(search=SearchVector('name', 'description')).filter(search=query)
