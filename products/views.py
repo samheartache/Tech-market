@@ -1,17 +1,22 @@
 from django.shortcuts import render, get_list_or_404
 from django.core.paginator import Paginator
+
+from products.utils import query_handler
 from products.models import Category, Product
 
 
-def get_products(request, category_slug):
+def get_products(request, category_slug=None):
 
     page = request.GET.get('page', 1)
     sort_way = request.GET.get('sort_way', None)
+    query = request.GET.get('q', None)
 
     categories = Category.objects.all()
 
     if category_slug == 'all':
         products = Product.objects.all()
+    elif query:
+        products = query_handler(query)
     else:
         products = Product.objects.filter(category__slug=category_slug)
     
