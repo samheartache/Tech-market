@@ -82,8 +82,12 @@ WSGI_APPLICATION = 'techmarket.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'Techmarket',
+        'USER': os.getenv('POSTGRES_LOGIN', 'fallback-postgresql-login'),
+        'PASSWORD': os.getenv('POSTGRES_PASSWORD', 'fallback-postgresql-password'),
+        'HOST': 'localhost',
+        'PORT': '5432',
     }
 }
 
