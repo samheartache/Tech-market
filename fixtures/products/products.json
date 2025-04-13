@@ -1,0 +1,302 @@
+[
+{
+  "model": "products.product",
+  "pk": 1,
+  "fields": {
+    "name": "KFA2 GeForce RTX 4060 CORE Black",
+    "slug": "kfa2-geforce-rtx-4060-core-black",
+    "description": "",
+    "price": "35999.00",
+    "image": "product_img/gcard1.jpg",
+    "category": 3
+  }
+},
+{
+  "model": "products.product",
+  "pk": 2,
+  "fields": {
+    "name": "KFA2 GeForce RTX 3060 CORE (LHR)",
+    "slug": "kfa2-geforce-rtx-3060-core-lhr",
+    "description": "",
+    "price": "31999.00",
+    "image": "product_img/gcard2.jpg",
+    "category": 3
+  }
+},
+{
+  "model": "products.product",
+  "pk": 3,
+  "fields": {
+    "name": "MSI GeForce RTX 3050 VENTUS 2X XS OC",
+    "slug": "msi-geforce-rtx-3050-ventus-2x-xs-oc",
+    "description": "",
+    "price": "26999.00",
+    "image": "product_img/gcard3.jpg",
+    "category": 3
+  }
+},
+{
+  "model": "products.product",
+  "pk": 4,
+  "fields": {
+    "name": "Palit GeForce RTX 4080 SUPER GamingPro",
+    "slug": "palit-geforce-rtx-4080-super-gamingpro",
+    "description": "",
+    "price": "144999.00",
+    "image": "product_img/gcard4.jpg",
+    "category": 3
+  }
+},
+{
+  "model": "products.product",
+  "pk": 5,
+  "fields": {
+    "name": "GIGABYTE GeForce RTX 4060 EAGLE OC",
+    "slug": "gigabyte-geforce-rtx-4060-eagle-oc",
+    "description": "",
+    "price": "35999.00",
+    "image": "product_img/gcard5.jpg",
+    "category": 3
+  }
+},
+{
+  "model": "products.product",
+  "pk": 6,
+  "fields": {
+    "name": "Клавиатура проводная Дарк Проджект KD87A",
+    "slug": "dark-project-kd87a",
+    "description": "",
+    "price": "8499.00",
+    "image": "product_img/kb1.jpg",
+    "category": 6
+  }
+},
+{
+  "model": "products.product",
+  "pk": 7,
+  "fields": {
+    "name": "Клавиатура проводная Logitech G Pro",
+    "slug": "logitech-g-pro",
+    "description": "",
+    "price": "17299.00",
+    "image": "product_img/kb2.jpg",
+    "category": 6
+  }
+},
+{
+  "model": "products.product",
+  "pk": 8,
+  "fields": {
+    "name": "Клавиатура проводная + беспроводная ARDOR GAMING Wakizashi",
+    "slug": "ardor-gaming-wakizashi",
+    "description": "",
+    "price": "7299.00",
+    "image": "product_img/kb3.jpg",
+    "category": 6
+  }
+},
+{
+  "model": "products.product",
+  "pk": 9,
+  "fields": {
+    "name": "Клавиатура проводная + беспроводная ARDOR GAMING Grader",
+    "slug": "ardor-gaming-grader",
+    "description": "",
+    "price": "7499.00",
+    "image": "product_img/kb4.jpg",
+    "category": 6
+  }
+},
+{
+  "model": "products.product",
+  "pk": 10,
+  "fields": {
+    "name": "Клавиатура проводная + беспроводная ASUS ROG Azoth Extreme",
+    "slug": "asus-rog-azoth-extreme",
+    "description": "",
+    "price": "52799.00",
+    "image": "product_img/kb5.jpg",
+    "category": 6
+  }
+},
+{
+  "model": "products.product",
+  "pk": 11,
+  "fields": {
+    "name": "Монитор ARDOR GAMING INFINITY PRO AQ27H1 черный",
+    "slug": "ardor-gaming-infinity-pro-aq27h1",
+    "description": "",
+    "price": "24399.00",
+    "image": "product_img/mon1.jpg",
+    "category": 5
+  }
+},
+{
+  "model": "products.product",
+  "pk": 12,
+  "fields": {
+    "name": "Монитор DEXP DF24N2 черный",
+    "slug": "dexp-df24n2",
+    "description": "",
+    "price": "7999.00",
+    "image": "product_img/mon2.jpg",
+    "category": 5
+  }
+},
+{
+  "model": "products.product",
+  "pk": 13,
+  "fields": {
+    "name": "Монитор ARDOR GAMING AURORA AQ27H3 черный",
+    "slug": "ardor-gaming-aurora-aq27h3",
+    "description": "",
+    "price": "19999.00",
+    "image": "product_img/mon3.jpg",
+    "category": 5
+  }
+},
+{
+  "model": "products.product",
+  "pk": 14,
+  "fields": {
+    "name": "Монитор MSI G272QPF E2 черный",
+    "slug": "msi-g272qpf-e2",
+    "description": "",
+    "price": "21999.00",
+    "image": "product_img/mon4.jpg",
+    "category": 5
+  }
+},
+{
+  "model": "products.product",
+  "pk": 15,
+  "fields": {
+    "name": "Монитор MSI MAG 271QPX QD-OLED E2 черный",
+    "slug": "msi-mag-271qpx-qdoled-e2",
+    "description": "",
+    "price": "82499.00",
+    "image": "product_img/mon5.jpg",
+    "category": 5
+  }
+},
+{
+  "model": "products.product",
+  "pk": 16,
+  "fields": {
+    "name": "Материнская плата MSI X870 GAMING PLUS WIFI",
+    "slug": "msi-x870-gaming-plus-wifi",
+    "description": "",
+    "price": "32499.00",
+    "image": "product_img/mboard1.jpg",
+    "category": 2
+  }
+},
+{
+  "model": "products.product",
+  "pk": 17,
+  "fields": {
+    "name": "Материнская плата MSI MPG X870E CARBON WIFI",
+    "slug": "msi-mpg-x870e-carbon-wifi",
+    "description": "",
+    "price": "69999.00",
+    "image": "product_img/mboard2.jpg",
+    "category": 2
+  }
+},
+{
+  "model": "products.product",
+  "pk": 18,
+  "fields": {
+    "name": "Материнская плата MSI MAG Z790 TOMAHAWK WIFI",
+    "slug": "msi-mag-z790-tomahawk-wifi",
+    "description": "",
+    "price": "29499.00",
+    "image": "product_img/mboard3.jpg",
+    "category": 2
+  }
+},
+{
+  "model": "products.product",
+  "pk": 19,
+  "fields": {
+    "name": "Материнская плата GIGABYTE Z890M AORUS ELITE WIFI7 ICE",
+    "slug": "gigabyte-z890m-aorus-elite-wifi7-ice",
+    "description": "",
+    "price": "38799.00",
+    "image": "product_img/mboard4.jpg",
+    "category": 2
+  }
+},
+{
+  "model": "products.product",
+  "pk": 20,
+  "fields": {
+    "name": "Материнская плата ASRock B760M Pro RS/D4",
+    "slug": "asrock-b760m-pro-rs-d4",
+    "description": "",
+    "price": "11999.00",
+    "image": "product_img/mboard5.png",
+    "category": 2
+  }
+},
+{
+  "model": "products.product",
+  "pk": 21,
+  "fields": {
+    "name": "Процессор AMD Ryzen 5 7500F OEM AM5, 6 x 3.7 ГГц, L2 - 6 МБ, L3 - 32 МБ, 2 х DDR5-5200 МГц, TDP 65 Вт",
+    "slug": "amd-ryzen-5-7500f-oem",
+    "description": "",
+    "price": "17899.00",
+    "image": "product_img/proc1.jpg",
+    "category": 4
+  }
+},
+{
+  "model": "products.product",
+  "pk": 22,
+  "fields": {
+    "name": "Процессор Intel Core i5-12400F OEM LGA 1700, 6 x 2.5 ГГц, L2 - 7.5 МБ, L3 - 18 МБ, 2 х DDR4, DDR5-4800 МГц, TDP 117 Вт",
+    "slug": "intel-core-i5-12400f-oem",
+    "description": "",
+    "price": "11299.00",
+    "image": "product_img/proc2.jpg",
+    "category": 4
+  }
+},
+{
+  "model": "products.product",
+  "pk": 23,
+  "fields": {
+    "name": "Процессор AMD Ryzen 7 7800X3D OEM AM5, 8 x 4.2 ГГц, L2 - 8 МБ, L3 - 96 МБ, 2 х DDR5-5200 МГц, AMD Radeon Graphics, TDP 120 Вт",
+    "slug": "amd-ryzen-7-7800x3d-oem",
+    "description": "",
+    "price": "53499.00",
+    "image": "product_img/proc3.jpg",
+    "category": 4
+  }
+},
+{
+  "model": "products.product",
+  "pk": 24,
+  "fields": {
+    "name": "Процессор Intel Core i7-12700KF OEM LGA 1700, 8P x 3.6 ГГц, 4E x 2.7 ГГц, L2 - 12 МБ, L3 - 25 МБ, 2 х DDR4, DDR5-4800 МГц, TDP 190 Вт",
+    "slug": "intel-core-i7-12700kf-oem",
+    "description": "",
+    "price": "25999.00",
+    "image": "product_img/proc4.jpg",
+    "category": 4
+  }
+},
+{
+  "model": "products.product",
+  "pk": 25,
+  "fields": {
+    "name": "Процессор AMD Ryzen 5 5500 OEM AM4, 6 x 3.6 ГГц, L2 - 3 МБ, L3 - 16 МБ, 2 х DDR4-3200 МГц, TDP 65 Вт",
+    "slug": "amd-ryzen-5-5500-oem",
+    "description": "",
+    "price": "9999.00",
+    "image": "product_img/proc5.jpg",
+    "category": 4
+  }
+}
+]
