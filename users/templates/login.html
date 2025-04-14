@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% load static %}
+{% block css %}
+  <link rel="stylesheet" href='{% static "css/login.css" %}' />
+{% endblock %}
+{% block content %}
+<div class="container_login">
+    <form action="post">
+        <h1>Войти в аккаунт</h1>
+        <div class="input_block">
+            <input type='email' placeholder="Почта" required>
+        </div>
+        <div class="input_block">
+            <input type="text" placeholder="Имя пользователя" required>
+        </div>
+        <div class="input_block">
+            <input type="password" placeholder="Пароль" required>
+        </div>
+        <div class="submit_btn">
+            <button type="submit">ВОЙТИ</button>
+        </div>
+        <div class="additional">
+            <p>У вас нет аккаунта? <a href="{% url "users:signup" %}">Зарегистрироваться</a></p>
+        </div>
+    </form>
+</div>
+{% endblock content %}

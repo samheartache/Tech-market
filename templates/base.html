@@ -19,8 +19,8 @@
             {% block search %}{% endblock %}
             <li class="menu-element"><a href='{% url "main:index" %}'>ГЛАВНАЯ</a></li>
             <li class="menu-element"><a href="cart.html">КОРЗИНА</a></li>
-            <li class="menu-element"><a href="signup.html">РЕГИСТРАЦИЯ</a></li>
-            <li class="menu-element"><a href="motherboards.html">ТОВАРЫ</a></li>
+            <li class="menu-element"><a href="{% url "users:signup" %}">РЕГИСТРАЦИЯ</a></li>
+            <li class="menu-element"><a href="{% url "products:products" 'all' %}">ТОВАРЫ</a></li>
           </ul>
         </nav>
       </div>
