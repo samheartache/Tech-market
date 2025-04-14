@@ -5,7 +5,7 @@
 {% endblock %}
 {% block content %}
 <div class="container_login">
-    <form action="post">
+    <form action="{% url "users:login" %}" method='post'>
         <h1>Войти в аккаунт</h1>
         <div class="input_block">
             <input type='email' placeholder="Почта" required>
