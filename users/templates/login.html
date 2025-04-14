@@ -6,15 +6,16 @@
 {% block content %}
 <div class="container_login">
     <form action="{% url "users:login" %}" method='post'>
+        {% csrf_token %}
         <h1>Войти в аккаунт</h1>
         <div class="input_block">
-            <input type='email' placeholder="Почта" required>
+            {{ form.email }}
         </div>
         <div class="input_block">
-            <input type="text" placeholder="Имя пользователя" required>
+            {{ form.username }}
         </div>
         <div class="input_block">
-            <input type="password" placeholder="Пароль" required>
+            {{ form.password }}
         </div>
         <div class="submit_btn">
             <button type="submit">ВОЙТИ</button>
