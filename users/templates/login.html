@@ -17,6 +17,7 @@
         <div class="input_block">
             <input type="password" value="{% if form.password.value %}{{form.password.value}}{% endif %}" id="id_password" name="password" placeholder="Пароль" required>
         </div>
+        {% include "includes/alerts.html" %}
         <div class="submit_btn">
             <button type="submit">ВОЙТИ</button>
         </div>
