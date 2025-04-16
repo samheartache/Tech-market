@@ -5,19 +5,20 @@
 {% endblock %}
 {% block content %}
 <div class="container_login">
-    <form action="post">
+    <form action="{% url "user:signup" %}" method="post">
+        {% csrf_token %}
         <h1>Регистрация</h1>
         <div class="input_block">
-            <input type="email" placeholder="Почта" required>
+            <input type="email" name="email" id="id_email" value="{% if form.email.value %}{{form.email.value}}{% endif %}" placeholder="Почта" required>
         </div>
         <div class="input_block">
-            <input type="text" placeholder="Имя пользователя" required>
+            <input type="text" name="username" id="id_username" value="{% if form.username.value %}{{form.username.value}}{% endif %}" placeholder="Имя пользователя" required>
         </div>
         <div class="input_block">
-            <input type="password" placeholder="Пароль" required>
+            <input type="password" name="password1" id="id_password1" value="{% if form.password1.value %}{{form.password1.value}}{% endif %}" placeholder="Пароль" required>
         </div>
         <div class="input_block">
-            <input type="password" placeholder="Подтверждение пароля" required>
+            <input type="password" name="password2" id="id_password2" value="{% if form.password2.value %}{{form.password2.value}}{% endif %}" placeholder="Подтверждение пароля" required>
         </div>
         <div class="submit_btn">
             <button type="submit">ЗАРЕГИСТРИРОВАТЬСЯ</button>

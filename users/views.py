@@ -3,7 +3,7 @@ from django.contrib import auth
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 
-from users.forms import LoginForm
+from users.forms import LoginForm, SignUpForm
 
 
 def login(request):
@@ -29,8 +29,20 @@ def login(request):
 
 
 def signup(request):
+    if request.method == 'POST':
+        form = SignUpForm(data=request.POST)
+        print(form)
+        if form.is_valid():
+            form.save()
+            user = form.instance
+            auth.login(request, user)
+            return HttpResponseRedirect(reverse('main:index'))
+    else:
+        form = SignUpForm()
+    
     context = {
-        'title': 'Регистрация'
+        'title': 'Вход в аккаунт',
+        'form': form,
     }
     return render(request, 'signup.html', context)
 
