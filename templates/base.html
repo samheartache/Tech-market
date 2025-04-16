@@ -19,8 +19,13 @@
             {% block search %}{% endblock %}
             <li class="menu-element"><a href='{% url "main:index" %}'>ГЛАВНАЯ</a></li>
             <li class="menu-element"><a href="cart.html">КОРЗИНА</a></li>
-            <li class="menu-element"><a href="{% url "users:signup" %}">РЕГИСТРАЦИЯ</a></li>
             <li class="menu-element"><a href="{% url "products:products" 'all' %}">ТОВАРЫ</a></li>
+            {% if not user.is_authenticated %}
+            <li class="menu-element"><a href="{% url "users:login" %}">ВОЙТИ</a></li>
+            {% else %}
+            <li class="menu-element"><a href="{% url "users:login" %}">МОЙ ПРОФИЛЬ</a></li>
+            {% endif %}
+            <li class="menu-element"><a href="{% url "users:logout" %}">ВЫЙТИ</a></li>
           </ul>
         </nav>
       </div>

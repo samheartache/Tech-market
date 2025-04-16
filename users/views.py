@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib import auth
 from django.http import HttpResponseRedirect
 from django.urls import reverse
@@ -55,4 +55,5 @@ def account(request):
 
 
 def logout(request):
-    pass
+    auth.logout(request)
+    return redirect(reverse('main:index'))
