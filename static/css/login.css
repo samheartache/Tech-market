@@ -74,38 +74,6 @@ body {
   font-size: 18px;
 }
 
-.error_field {
-  display: block;
-  margin-top: 8px;
-  padding: 12px 15px 12px 45px;
-  background-color: rgba(255, 0, 0, 0.15);
-  border: 1px solid rgba(255, 0, 0, 0.3);
-  border-radius: 8px;
-  color: #ffffff;
-  font-size: 14px;
-  line-height: 1.4;
-  position: relative;
-  animation: fadeIn 0.3s ease-out;
-}
-
-.error_field::before {
-  content: "!";
-  position: absolute;
-  left: 15px;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 20px;
-  height: 20px;
-  background-color: rgba(255, 0, 0, 0.5);
-  color: white;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 12px;
-  font-weight: bold;
-}
-
 .additional {
   display: flex;
   justify-content: space-between;

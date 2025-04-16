@@ -24,6 +24,12 @@ class SignUpForm(UserCreationForm):
     username = forms.CharField()
     password1 = forms.CharField()
     password2 = forms.CharField()
+
+    error_messages = {
+        'password_mismatch': 'Пароли не совпадают. Попробуйте еще раз.',
+        'password_common': 'Пароль слишком простой.',
+        'password_entirely_numeric': 'Пароль не может состоять только из цифр.',
+    }
     
     class Meta:
         model = User

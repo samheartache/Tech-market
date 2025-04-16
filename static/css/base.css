@@ -211,31 +211,36 @@ footer {
   text-align: center;
 }
 
-.auth_error {
-  margin: 15px 0;
+.error_field {
+  display: block;
   max-width: 550px;
-}
-
-.error_message {
-  display: flex;
-  align-items: center;
-  padding: 12px 16px;
-  background-color: #fde8e8;
-  border: 1px solid #f5c6cb;
-  border-radius: 4px;
-  color: #721c24;
+  margin-top: 8px;
+  margin-bottom: 5px;
+  padding: 12px 15px 12px 45px;
+  background-color: rgba(255, 0, 0, 0.15);
+  border: 1px solid rgba(255, 0, 0, 0.3);
+  border-radius: 8px;
+  color: #ffffff;
   font-size: 14px;
-  line-height: 1.5;
+  line-height: 1.4;
+  position: relative;
+  animation: fadeIn 0.3s ease-out;
 }
 
-.error_icon {
+.error_field::before {
+  content: "!";
+  position: absolute;
+  left: 15px;
+  top: 50%;
+  transform: translateY(-50%);
   width: 20px;
   height: 20px;
-  margin-right: 10px;
-  fill: #dc3545;
-  flex-shrink: 0;
-}
-
-.error_text {
-  flex-grow: 1;
+  background-color: rgba(255, 0, 0, 0.5);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: bold;
 }
