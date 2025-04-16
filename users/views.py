@@ -51,7 +51,7 @@ def account(request):
     context = {
         'title': 'Аккаунт пользователя'
     }
-    return render(request, '', context)
+    return render(request, 'account.html', context)
 
 
 def logout(request):

@@ -23,7 +23,7 @@
             {% if not user.is_authenticated %}
             <li class="menu-element"><a href="{% url "users:login" %}">ВОЙТИ</a></li>
             {% else %}
-            <li class="menu-element"><a href="{% url "users:login" %}">МОЙ ПРОФИЛЬ</a></li>
+            <li class="menu-element"><a href="{% url "users:account" %}">МОЙ ПРОФИЛЬ</a></li>
             {% endif %}
             <li class="menu-element"><a href="{% url "users:logout" %}">ВЫЙТИ</a></li>
           </ul>
