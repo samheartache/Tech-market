@@ -9,9 +9,11 @@
 * {
     font-family: 'Akt';
 }
+
 body {
     background: url('../imgs/logreg_bg.jpeg') 0 0 /cover;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
 }
