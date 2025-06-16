@@ -25,7 +25,9 @@
             {% else %}
             <li class="menu-element"><a href="{% url "users:account" %}">МОЙ ПРОФИЛЬ</a></li>
             {% endif %}
+            {% if user.is_authenticated %}
             <li class="menu-element"><a href="{% url "users:logout" %}">ВЫЙТИ</a></li>
+            {% endif %}
           </ul>
         </nav>
       </div>

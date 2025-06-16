@@ -5,6 +5,14 @@ body {
   top: 0;
 }
 
+.stat-card {
+  cursor: pointer;
+}
+
+.account-avatar {
+  cursor: pointer;
+}
+
 .account-container {
   backdrop-filter: blur(40px);
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
@@ -181,6 +189,10 @@ body {
     background: #0a6da5;
 }
 
+.edit-profile-btn:active{
+  transform: scale(0.96);
+}
+
 .quick-stats {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -204,6 +216,10 @@ body {
   transform: translateY(-5px);
   background: rgba(13, 141, 215, 0.15);
   box-shadow: 0 10px 20px rgba(13, 141, 215, 0.2);
+}
+
+.stat-card:active{
+  transform: scale(0.96);
 }
 
 .stat-icon {
