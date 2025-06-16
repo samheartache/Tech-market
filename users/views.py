@@ -57,3 +57,7 @@ def account(request):
 def logout(request):
     auth.logout(request)
     return redirect(reverse('main:index'))
+
+
+def editprofile(request):
+    return render(request, 'editprofile.html')

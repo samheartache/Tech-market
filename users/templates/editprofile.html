@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% load static %}
+{% block css %}
+<link rel='stylesheet' href='{% static "css/edit.css" %}'>
+{% endblock css %}
+{% block content %}
+<div class="account-container">
+  <div class="account-header">
+    <div class="avatar-upload">
+      <img id="avatar-preview" 
+           src="{% if user.profile.avatar %}{{ user.profile.avatar.url }}{% else %}{% static 'imgs/default_ava.png' %}{% endif %}" 
+           alt="Аватар" 
+           class="account-avatar">
+      <label for="id_avatar" class="avatar-upload-label">
+        <svg class="upload-icon" viewBox="0 0 24 24">
+          <path fill="currentColor" d="M14,13V17H10V13H7L12,8L17,13M19.35,10.03C18.67,6.59 15.64,4 12,4C9.11,4 6.6,5.64 5.35,8.03C2.34,8.36 0,10.9 0,14A6,6 0 0,0 6,20H19A5,5 0 0,0 24,15C24,12.36 21.95,10.22 19.35,10.03Z"/>
+        </svg>
+        Изменить фото
+      </label>
+      <input type="file" id="id_avatar" name="avatar" accept="image/*" style="display: none;">
+    </div>
+    <div class="account-info">
+      <h2>Редактирование профиля</h2>
+    </div>
+  </div>
+
+  <form method="post" enctype="multipart/form-data" class="edit-form">
+    {% csrf_token %}
+    
+    <div class="form-grid">
+      <div class="form-group">
+        <label for="id_username">Имя пользователя</label>
+        <input type="text" id="id_username" name="username" value="{{ form.username.value }}" required>
+        {% if form.username.errors %}
+          <div class="error-message">{{ form.username.errors }}</div>
+        {% endif %}
+      </div>
+
+      <div class="form-group">
+        <label for="id_email">Email</label>
+        <input type="email" id="id_email" name="email" value="{{ form.email.value }}" required>
+        {% if form.email.errors %}
+          <div class="error-message">{{ form.email.errors }}</div>
+        {% endif %}
+      </div>
+
+      <div class="form-group">
+        <label for="id_first_name">Имя</label>
+        <input type="text" id="id_first_name" name="first_name" value="{{ form.first_name.value|default_if_none:'' }}">
+      </div>
+
+      <div class="form-group">
+        <label for="id_last_name">Фамилия</label>
+        <input type="text" id="id_last_name" name="last_name" value="{{ form.last_name.value|default_if_none:'' }}">
+      </div>
+    </div>
+
+    <div class="form-actions">
+      <button type="submit" class="save-btn">Сохранить изменения</button>
+      <a href="{% url 'user:account' %}" class="cancel-btn">Отмена</a>
+    </div>
+  </form>
+</div>
+{% endblock %}
