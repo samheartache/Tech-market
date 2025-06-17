@@ -3,6 +3,9 @@
 {% block css %}
 <link rel='stylesheet' href='{% static "css/edit.css" %}'>
 {% endblock css %}
+{% block js %}
+  <script src='{% static "js/update_ava.js" %}' defer></script>
+{% endblock %}
 {% block content %}
   <form method="post" action="{% url "user:editprofile" %}" class="edit-form" enctype="multipart/form-data">
     {% csrf_token %}
