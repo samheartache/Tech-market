@@ -3,7 +3,7 @@ from django.contrib import auth
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 
-from users.forms import LoginForm, SignUpForm
+from users.forms import LoginForm, SignUpForm, EditProfileForm
 
 
 def login(request):
@@ -31,7 +31,6 @@ def login(request):
 def signup(request):
     if request.method == 'POST':
         form = SignUpForm(data=request.POST)
-        print(form)
         if form.is_valid():
             form.save()
             user = form.instance
@@ -60,4 +59,21 @@ def logout(request):
 
 
 def editprofile(request):
-    return render(request, 'editprofile.html')
+    if request.method == 'POST':
+        form = EditProfileForm(data=request.POST, instance=request.user, files=request.FILES)
+        if form.is_valid():
+            if 'avatar' in request.FILES:
+                print(request.user.avatar)
+                request.user.avatar = request.FILES['avatar']
+            form.save()
+            return HttpResponseRedirect(reverse('user:account'))
+        else:
+            print(form.errors)
+    else:
+        form = EditProfileForm(instance=request.user)
+    
+    context = {
+        'title': 'Редактирование профиля',
+        'form': form
+    }
+    return render(request, 'editprofile.html', context)

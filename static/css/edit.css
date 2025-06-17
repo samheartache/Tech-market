@@ -20,16 +20,6 @@ body {
   overflow: hidden;
 }
 
-.account-container::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 3px;
-  background: linear-gradient(90deg, #0d8dd7, rgba(13, 141, 215, 0.2));
-}
-
 .account-header {
   display: flex;
   align-items: center;

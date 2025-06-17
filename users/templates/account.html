@@ -7,8 +7,8 @@
 <div class="account-container">
   <div class="account-header">
     <img 
-    src="{% if user.profile.avatar %}
-    {{ user.profile.avatar.url }}
+    src="{% if user.avatar %}
+    {{ user.avatar.url }}
     {% else %}
      {% static "imgs/default_ava.png" %}
     {% endif %}"
