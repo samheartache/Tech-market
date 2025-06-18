@@ -42,8 +42,10 @@
             
             <div class="cart-item-actions">
                 <p class="item-total">Сумма: {{ cart.products_price }} ₽</p>
-                <a href="{% url "cart:remove" cart.id %}" class="remove-btn">Удалить</a>
-                <a href="{% url 'products:product' cart.product.slug %}" class="order-btn">Заказать</a>
+                <div class="cart-buttons">
+                    <a href="{% url 'products:product' cart.product.slug %}" class="order-btn">Заказать</a>
+                    <a href="{% url "cart:remove" cart.id %}" class="remove-btn">Удалить</a>
+                </div>
             </div>
         </div>
         {% endfor %}
