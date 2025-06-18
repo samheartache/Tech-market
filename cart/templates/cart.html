@@ -42,10 +42,7 @@
             
             <div class="cart-item-actions">
                 <p class="item-total">Сумма: {{ cart.products_price }} ₽</p>
-                <form method="post" action="">
-                    {% csrf_token %}
-                    <button type="submit" class="remove-btn">Удалить</button>
-                </form>
+                <a href="{% url "cart:remove" cart.id %}" class="remove-btn">Удалить</a>
                 <a href="{% url 'products:product' cart.product.slug %}" class="order-btn">Заказать</a>
             </div>
         </div>

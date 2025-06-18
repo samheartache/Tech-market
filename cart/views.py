@@ -16,3 +16,10 @@ def add_to_cart(request, product_slug):
     if request.user.is_authenticated:
         Cart.objects.create(user=request.user, product=product, quantity=1)
     return redirect(request.META['HTTP_REFERER'])
+
+
+def remove(request, id_in_cart):
+    cart_prod = Cart.objects.get(id=id_in_cart)
+    cart_prod.delete()
+    return redirect(request.META['HTTP_REFERER'])
+
