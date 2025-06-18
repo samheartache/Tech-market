@@ -7,30 +7,64 @@
 {% endblock css %}
 
 {% block content %}
-{% user_cart  as carts %}
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-{% if carts.exists %}
-  {% for cart in carts %}
-  <div class="cart-item">
-    <p>{{ cart.product.name }} - {{ cart.quantity }} шт.</p>
-    <p>Цена: {{ cart.product.price }} ₽</p>
-    <p>Сумма: {{ cart.products_price }} ₽</p>
-  </div>
-  {% endfor %}
-  
-  <div class="cart-total">
-    <p>Итого: {{ carts.total_price }} ₽</p>
-  </div>
-{% else %}
-  <p>Ваша корзина пуста</p>
-{% endif %}
+<main class="cart-container">
+    <h1 class="cart-title">Ваша корзина</h1>
+    
+    {% user_cart as carts %}
+    {% if carts.exists %}
+    <div class="cart-items">
+        {% for cart in carts %}
+        <div class="cart-item">
+            <div class="cart-item-image">
+                {% if cart.product.image %}
+                <img src="{{ cart.product.image.url }}" alt="{{ cart.product.name }}">
+                {% else %}
+                <img src="{% static 'imgs/default_product.png' %}" alt="Нет изображения">
+                {% endif %}
+            </div>
+            
+            <div class="cart-item-details">
+                <h3 class="product-name">{{ cart.product.name }}</h3>
+                <p class="product-price">{{ cart.product.price }} ₽/шт</p>
+                
+                <div class="quantity-controls">
+                    <form method="post" action="" class="quantity-form">
+                        {% csrf_token %}
+                        <button type="submit" class="quantity-btn">-</button>
+                    </form>
+                    <span class="quantity">{{ cart.quantity }}</span>
+                    <form method="post" action="" class="quantity-form">
+                        {% csrf_token %}
+                        <button type="submit" class="quantity-btn">+</button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="cart-item-actions">
+                <p class="item-total">Сумма: {{ cart.products_price }} ₽</p>
+                <form method="post" action="">
+                    {% csrf_token %}
+                    <button type="submit" class="remove-btn">Удалить</button>
+                </form>
+                <a href="{% url 'products:product' cart.product.slug %}" class="order-btn">Заказать</a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    
+    <div class="cart-summary">
+        <div class="total-price">
+            <span>Итого:</span>
+            <span class="total-amount">{{ carts.total_price }} ₽</span>
+        </div>
+        <a href="" class="checkout-btn">Заказать всё</a>
+    </div>
+    {% else %}
+    <div class="empty-cart">
+        <img src="{% static 'imgs/empty_cart.png' %}" alt="Корзина пуста">
+        <p>Ваша корзина пуста</p>
+        <a href="{% url 'products:products' 'all' %}" class="continue-shopping">Продолжить покупки</a>
+    </div>
+    {% endif %}
+</main>
 {% endblock content %}
