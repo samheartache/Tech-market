@@ -18,7 +18,7 @@
           <ul>
             {% block search %}{% endblock %}
             <li class="menu-element"><a href='{% url "main:index" %}'>ГЛАВНАЯ</a></li>
-            <li class="menu-element"><a href="cart.html">КОРЗИНА</a></li>
+            <li class="menu-element"><a href="{% url "cart:cart" %}">КОРЗИНА</a></li>
             <li class="menu-element"><a href="{% url "products:products" 'all' %}">ТОВАРЫ</a></li>
             {% if not user.is_authenticated %}
             <li class="menu-element"><a href="{% url "users:login" %}">ВОЙТИ</a></li>
