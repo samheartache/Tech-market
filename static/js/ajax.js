@@ -1,59 +1,65 @@
 $(document).ready(function() {
-    
-    function showNotification(message) {
+    function showNotification(message, isError = false) {
+        const notification = $("#jq-notification");
         notification.stop(true, true)
-        .removeClass('fade-out')
-        .html(message)
-        .css('opacity', 1)
-        .show();
+            .removeClass('fade-out')
+            .html(message)
+            .css('opacity', 1)
+            .show();
+        
+        if (isError) {
+            notification.css('background-color', '#f44336');
+        } else {
+            notification.css('background-color', '#4CAF50');
+        }
         
         setTimeout(function() {
             notification.addClass('fade-out');
-            
             setTimeout(function() {
                 notification.hide();
             }, 400);
         }, 1500);
     }
-    
-    const notification = $("#jq-notification");
 
-    $(document).on("click", ".add_to_cart", function(e) {
+    $(document).on("click", ".add_to_cart, .remove_from_cart", function(e) {
         e.preventDefault();
         
-        const product_id = $(this).data("product-id");
-        const add_to_cart_url = $(this).attr("href");
-        const buttonClasses = this.classList
+        const button = $(this);
+        const product_id = button.data("product-id");
+        const csrf_token = $("[name=csrfmiddlewaretoken]").val();
+        const isAddAction = button.hasClass("add_to_cart");
+        const url = isAddAction ? button.data("add-url") : button.data("remove-url");
 
-        if (buttonClasses.contains("add_to_cart")) {
-            buttonClasses.remove("add_to_cart")
-            buttonClasses.add("remove_from_cart")
-            this.textContent = "Удалить из корзины"
-
-            $.ajax({
+        $.ajax({
             type: "POST",
-            url: add_to_cart_url,
+            url: url,
             data: {
                 product_id: product_id,
-                csrfmiddlewaretoken: $("[name=csrfmiddlewaretoken]").val(),
+                csrfmiddlewaretoken: csrf_token,
             },
             success: function(data) {
+                if (isAddAction) {
+                    button.removeClass("add_to_cart").addClass("remove_from_cart");
+                    button.text("Удалить из корзины");
+                    button.attr("href", button.data("remove-url"));
+                } else {
+                    button.removeClass("remove_from_cart").addClass("add_to_cart");
+                    button.text("Добавить в корзину");
+                    button.attr("href", button.data("add-url"));
+                }
                 showNotification(data.message);
             },
-            error: function() {
-                showNotification("Ошибка при добавлении товара");
-                notification.css('background-color', '#f44336');
+            error: function(xhr) {
+                const errorMsg = isAddAction 
+                    ? "Ошибка при добавлении товара" 
+                    : "Ошибка при удалении товара";
+                showNotification(errorMsg, true);
+                console.error(xhr.responseText);
             }
         });
-        }
-
-        else {
-            buttonClasses.remove("remove_from_cart")
-            buttonClasses.add("add_to_cart")
-        }
     });
     
     $(window).scroll(function() {
-        notification.css('top', 20 + $(window).scrollTop() + 'px');
+        $("#jq-notification").css('top', 20 + $(window).scrollTop() + 'px');
     });
 });

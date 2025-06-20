@@ -32,10 +32,16 @@ def add_to_cart(request):
     return JsonResponse(response)
 
 
-def remove(request, id_in_cart):
-    cart_prod = Cart.objects.get(id=id_in_cart)
+def remove(request):
+    product_id = request.POST.get('product_id')
+    cart_prod = Cart.objects.get(product=product_id, user=request.user.id)
     cart_prod.delete()
-    return redirect(request.META['HTTP_REFERER'])
+
+    response = {
+        'message': 'Товар удален из корзины'
+    }
+
+    return JsonResponse(response)
 
 
 def decrease(request, product_slug):
