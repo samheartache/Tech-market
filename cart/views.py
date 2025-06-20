@@ -13,6 +13,7 @@ def cart(request):
 
 def add_to_cart(request):
     product_id = request.POST.get('product_id')
+    print(product_id)
     product = Product.objects.get(id=product_id)
 
     if request.user.is_authenticated:
