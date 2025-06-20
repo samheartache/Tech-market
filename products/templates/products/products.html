@@ -7,6 +7,7 @@
 {% endblock %}
 {% block js %}
 <script src='{% static "js/aside.js" %}' defer></script>
+<script src='{% static "js/ajax.js" %}' defer></script>
 {% endblock %}
 {% block search %}
 <li>
@@ -80,7 +81,10 @@
         <div class="product_below desc_el">
           <div class="product_price">{{ product.price }} ₽</div>
           <div class="buttons">
-            <button><a href="{% url "cart:add_to_cart" product.slug %}">Добавить в корзину</a></button>
+            <button><a href="{% url "cart:add_to_cart" %}" class="add_to_cart" data-product-id="{{ product.id }}">
+              {% csrf_token %}
+              Добавить в корзину
+            </a></button>
             <button>Заказать</button>
           </div>
         </div>
