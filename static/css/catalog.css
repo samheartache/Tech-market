@@ -106,7 +106,7 @@ section:hover {
     gap: 10px;
 }
 
-.action-button {
+.order-button {
     border-radius: 15px;
     padding: 10px 20px;
     background: #0d8dd7;
@@ -121,12 +121,63 @@ section:hover {
     font-family: inherit;
 }
 
-.action-button:hover {
+
+.order-button:hover {
     transform: scale(1.04);
     background: #0a6da5;
 }
 
-.action-button:active {
+.order-button:active {
+    transform: scale(0.96);
+}
+
+.add_to_cart {
+    border-radius: 15px;
+    padding: 10px 20px;
+    background: #0bc12d;
+    color: #fff;
+    font-size: 18px;
+    cursor: pointer;
+    transition: transform 0.2s, background 0.2s;
+    border: none;
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
+    font-family: inherit;
+}
+
+
+.add_to_cart:hover {
+    transform: scale(1.04);
+    background: #0aa53b;
+}
+
+.add_to_cart:active {
+    transform: scale(0.96);
+}
+
+.remove_from_cart {
+    border-radius: 15px;
+    padding: 10px 20px;
+    background: #ec0a0a;
+    color: #fff;
+    font-size: 18px;
+    cursor: pointer;
+    transition: transform 0.2s, background 0.2s;
+    border: none;
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
+    font-family: inherit;
+}
+
+
+.remove_from_cart:hover {
+    transform: scale(1.04);
+    background: #a50a0a;
+}
+
+.remove_from_cart:active {
     transform: scale(0.96);
 }
 

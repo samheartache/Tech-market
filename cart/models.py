@@ -9,9 +9,7 @@ class CartQuerySet(models.QuerySet):
         return sum(item.products_price() for item in self)
     
     def total_quantity(self):
-        if self:
-            return sum(item.quantity for item in self)
-        return 0
+        return sum(item.quantity for item in self) if self.exists() else 0
 
 
 class Cart(models.Model):
@@ -26,7 +24,7 @@ class Cart(models.Model):
         verbose_name = 'Корзина'
         verbose_name_plural = 'Корзину'
     
-    objects = CartQuerySet().as_manager()
+    objects = CartQuerySet.as_manager()
 
     def products_price(self):
         return self.quantity * self.product.price

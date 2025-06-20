@@ -2,6 +2,7 @@ from django.db.models import Q
 from django.contrib.postgres.search import SearchVector, SearchRank, SearchQuery, SearchHeadline
 
 from products.models import Product
+from cart.models import Cart
 
 
 def query_handler(query):

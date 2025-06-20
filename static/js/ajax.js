@@ -1,12 +1,11 @@
 $(document).ready(function() {
-    const notification = $("#jq-notification");
     
     function showNotification(message) {
         notification.stop(true, true)
-            .removeClass('fade-out')
-            .html(message)
-            .css('opacity', 1)
-            .show();
+        .removeClass('fade-out')
+        .html(message)
+        .css('opacity', 1)
+        .show();
         
         setTimeout(function() {
             notification.addClass('fade-out');
@@ -17,13 +16,21 @@ $(document).ready(function() {
         }, 1500);
     }
     
+    const notification = $("#jq-notification");
+
     $(document).on("click", ".add_to_cart", function(e) {
         e.preventDefault();
         
         const product_id = $(this).data("product-id");
         const add_to_cart_url = $(this).attr("href");
+        const buttonClasses = this.classList
 
-        $.ajax({
+        if (buttonClasses.contains("add_to_cart")) {
+            buttonClasses.remove("add_to_cart")
+            buttonClasses.add("remove_from_cart")
+            this.textContent = "Удалить из корзины"
+
+            $.ajax({
             type: "POST",
             url: add_to_cart_url,
             data: {
@@ -38,6 +45,12 @@ $(document).ready(function() {
                 notification.css('background-color', '#f44336');
             }
         });
+        }
+
+        else {
+            buttonClasses.remove("remove_from_cart")
+            buttonClasses.add("add_to_cart")
+        }
     });
     
     $(window).scroll(function() {
