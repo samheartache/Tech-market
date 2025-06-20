@@ -8,9 +8,9 @@ $(document).ready(function() {
             .show();
         
         if (isError) {
-            notification.css('background-color', '#f44336'); // Красный для ошибок/удаления
+            notification.css('background-color', '#f44336');
         } else {
-            notification.css('background-color', '#4CAF50'); // Зеленый для успешного добавления
+            notification.css('background-color', '#4CAF50');
         }
         
         setTimeout(function() {
@@ -42,12 +42,12 @@ $(document).ready(function() {
                     button.removeClass("add_to_cart").addClass("remove_from_cart");
                     button.text("Удалить из корзины");
                     button.attr("href", button.data("remove-url"));
-                    showNotification(data.message); // Зеленый фон
+                    showNotification(data.message);
                 } else {
                     button.removeClass("remove_from_cart").addClass("add_to_cart");
                     button.text("Добавить в корзину");
                     button.attr("href", button.data("add-url"));
-                    showNotification(data.message, true); // Красный фон
+                    showNotification(data.message, true);
                 }
             },
             error: function(xhr) {
