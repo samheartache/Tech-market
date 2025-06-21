@@ -3,6 +3,7 @@ from django.shortcuts import redirect, render
 
 from products.models import Product
 from cart.models import Cart
+from cart.utils import get_user_cart
 
 def cart(request):
     context = {
@@ -37,8 +38,17 @@ def remove(request):
     cart_prod = Cart.objects.get(product=product_id, user=request.user.id)
     cart_prod.delete()
 
+    user_cart = get_user_cart(request=request)
+    amount = user_cart.total_quantity()
+    price = user_cart.total_price()
+
+    print(amount)
+    print(price)
+
     response = {
-        'message': 'Товар удален из корзины'
+        'message': 'Товар удален из корзины',
+        'amount': amount,
+        'price': f'{price} ₽',
     }
 
     return JsonResponse(response)

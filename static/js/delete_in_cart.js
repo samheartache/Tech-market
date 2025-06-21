@@ -12,8 +12,12 @@ $(document).ready(function() {
                 csrfmiddlewaretoken: $("[name=csrfmiddlewaretoken]").val(),
             },
             success: function (data) {
-                const cartBlock = document.getElementById(`${product_id}`)
-                cartBlock.remove()
+                const cartBlock = document.getElementById(`${product_id}`);
+                cartBlock.remove();
+
+                const totalPrice = document.querySelector('.total-amount');
+                totalPrice.textContent = data.price
+                console.log(totalPrice)
             }
         })
 
