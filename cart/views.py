@@ -1,3 +1,4 @@
+from django.template.loader import render_to_string
 from django.http import JsonResponse
 from django.shortcuts import redirect, render
 
@@ -42,6 +43,8 @@ def remove(request):
     amount = user_cart.total_quantity()
     price = user_cart.total_price()
 
+    cart_page = render_to_string('includes/empty_cart.html', request=request)
+
     print(amount)
     print(price)
 
@@ -49,6 +52,7 @@ def remove(request):
         'message': 'Товар удален из корзины',
         'amount': amount,
         'price': f'{price} ₽',
+        'cart_page': cart_page,
     }
 
     return JsonResponse(response)

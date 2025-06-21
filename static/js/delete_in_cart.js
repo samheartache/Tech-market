@@ -14,10 +14,18 @@ $(document).ready(function() {
             success: function (data) {
                 const cartBlock = document.getElementById(`${product_id}`);
                 cartBlock.remove();
+                const amount = data.amount;
 
-                const totalPrice = document.querySelector('.total-amount');
-                totalPrice.textContent = data.price
-                console.log(totalPrice)
+                if (amount === 0) {
+                    const cartContainer = $('.cart-container');
+                    cartContainer.html(data.cart_page);
+                }
+
+                else {
+                    const totalPrice = document.querySelector('.total-amount');
+                    totalPrice.textContent = data.price;
+                    console.log(totalPrice);
+                }
             }
         })
 

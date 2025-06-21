@@ -1,0 +1,6 @@
+{% load static %}
+<div class="empty-cart">
+        <img src="{% static 'imgs/empty_cart.png' %}" alt="Корзина пуста">
+        <p>Ваша корзина пуста</p>
+        <a href="{% url 'products:products' 'all' %}" class="continue-shopping">Продолжить покупки</a>
+</div>
