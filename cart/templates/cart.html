@@ -19,6 +19,8 @@
     {% user_cart request as carts %}
     {% all_in_order_tag request as all%}
     {% amount_in_order_tag request as amount_order%}
+    {% price_in_order_tag request as price_order%}
+
     {% if carts.exists %}
 
     <h1 class="cart-title">Ваша корзина</h1>
@@ -90,7 +92,7 @@
                     <div class="summary-divider"></div>
                     <div class="summary-row total-row">
                         <span class="summary-label">Итого к оплате:</span>
-                        <span class="summary-value total-amount" id="total-amount">{{ carts.total_price }} ₽</span>
+                        <span class="summary-value total-amount" id="total-amount">{{ price_order }} ₽</span>
                     </div>
                 </div>
                 <a href="#" class="checkout-btn">Оформить заказ</a>
