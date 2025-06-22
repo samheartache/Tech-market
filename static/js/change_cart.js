@@ -13,20 +13,31 @@ $(document).ready(function () {
                 csrfmiddlewaretoken: csrf_token,
             },
             success: function(data) {
-                prodAmount = data.product_amount
-                if (prodAmount === 0) {
-                    const cartBlock = document.getElementById(`${product_id}`);
-                    cartBlock.remove();
+                const prodAmount = data.product_amount;
+                const totalPriceEl = document.querySelector('.total-amount')
+                const sumPriceEl = document.getElementById(`sum - ${product_id}`)
 
-                    if (data.amount === 0) {
+                if (prodAmount === 0) {
+
+                    if (data.total_amount === 0) {
                         const cartContainer = $('.cart-container');
                         cartContainer.html(data.cart_page);
+                    }
+
+                    else {
+                        const cartBlock = document.getElementById(`${product_id}`);
+                        cartBlock.remove();
+
+                        totalPriceEl.textContent = data.total_price
                     }
                 }
 
                 else {
-                    const amount = document.querySelector('.quantity')
-                    amount.textContent = prodAmount
+                    const amount = document.querySelector('.quantity');
+                    amount.textContent = prodAmount;
+
+                    sumPriceEl.textContent = data.sum_price
+                    totalPriceEl.textContent = data.total_price
                 }
             }
         })

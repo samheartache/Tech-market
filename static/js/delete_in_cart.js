@@ -23,7 +23,7 @@ $(document).ready(function() {
 
                 else {
                     const totalPrice = document.querySelector('.total-amount');
-                    totalPrice.textContent = data.price;
+                    totalPrice.textContent = data.total_price;
                 }
             }
         })

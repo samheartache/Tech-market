@@ -47,7 +47,7 @@
             </div>
             
             <div class="cart-item-actions">
-                <p class="item-total">Сумма: {{ cart.products_price }} ₽</p>
+                <p class="item-total" id="sum - {{ cart.product.id }}">Сумма: {{ cart.products_price }} ₽</p>
                 <div class="cart-buttons">
                     <a href="{% url 'products:product' cart.product.slug %}" class="order-btn">Заказать</a>
                     <a href="{% url "cart:remove" %}" class="remove-btn remove_from_cart" data-product-id="{{ cart.product.id }}">
