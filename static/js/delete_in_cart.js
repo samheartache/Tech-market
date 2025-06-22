@@ -24,7 +24,6 @@ $(document).ready(function() {
                 else {
                     const totalPrice = document.querySelector('.total-amount');
                     totalPrice.textContent = data.price;
-                    console.log(totalPrice);
                 }
             }
         })

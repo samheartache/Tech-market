@@ -9,6 +9,7 @@
 {% block js %}
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" defer></script>
 <script src='{% static "js/delete_in_cart.js" %}' defer></script>
+<script src='{% static "js/change_cart.js" %}' defer></script>
 {% endblock %}
 
 {% block content %}
@@ -33,12 +34,12 @@
                 <p class="product-price">{{ cart.product.price }} ₽/шт</p>
                 
                 <div class="quantity-controls">
-                    <form method="post" action="{% url "cart:decrease" %}" class="quantity-form">
+                    <form method="post" action="{% url "cart:decrease" %}" class="quantity-form reduce" data-product-id="{{ cart.product.id }}">
                         {% csrf_token %}
                         <button type="submit" class="quantity-btn">-</button>
                     </form>
                     <span class="quantity">{{ cart.quantity }}</span>
-                    <form method="post" action="{% url "cart:add_to_cart" %}" class="quantity-form">
+                    <form method="post" action="{% url "cart:add_to_cart" %}" class="quantity-form increase" data-product-id="{{ cart.product.id }}">
                         {% csrf_token %}
                         <button type="submit" class="quantity-btn">+</button>
                     </form>
