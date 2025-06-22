@@ -10,4 +10,5 @@ urlpatterns = [
     path('remove/', views.remove, name='remove'),
     path('decrease/', views.decrease, name='decrease'),
     path('change_order/', views.change_order, name='change_order'),
+    path('select_all/', views.select_all, name='select_all'),
 ]

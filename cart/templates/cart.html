@@ -9,6 +9,7 @@
 {% block js %}
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" defer></script>
 <script src='{% static "js/delete_in_cart.js" %}' defer></script>
+<script src='{% static "js/select_all_cart.js" %}' defer></script>
 <script src='{% static "js/change_cart.js" %}' defer></script>
 <script src='{% static "js/select_cart.js" %}' defer></script>
 {% endblock %}
@@ -26,7 +27,8 @@
         <div class="cart-items-container">
             <div class="select-all-fixed">
                 <label class="select-all">
-                    <input type="checkbox" id="select-all" {% if all %} checked {% endif %}>
+                    <input type="checkbox" data-url="{% url "cart:select_all" %}" id="select-all" {% if all %} checked {% endif %}>
+                    {% csrf_token %}
                     <span>Выбрать все</span>
                 </label>
             </div>

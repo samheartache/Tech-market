@@ -133,3 +133,27 @@ def change_order(request):
 
     return JsonResponse(response)
 
+
+def select_all(request):
+    flag = False if request.POST.get('flag') == 'false' else True
+
+    for cart_prod in Cart.objects.filter(user=request.user):
+        cart_prod.in_order = flag
+        cart_prod.save()
+    
+    if flag:
+        total_price = price_in_order(request=request)
+        amount_order = amount_in_order(request=request)
+
+        response = {
+            'total_price': total_price,
+            'amount_order': amount_order,
+        }
+    else:
+        response = {
+            'flag': 1,
+        }
+    
+    return JsonResponse(response)
+
+
