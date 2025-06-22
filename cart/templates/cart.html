@@ -39,7 +39,7 @@
                         {% csrf_token %}
                         <button type="submit" class="quantity-btn">-</button>
                     </form>
-                    <span class="quantity">{{ cart.quantity }}</span>
+                    <span class="quantity" id="q - {{ cart.product.id }}">{{ cart.quantity }}</span>
                     <form method="post" action="{% url "cart:add_to_cart" %}" class="quantity-form increase" data-product-id="{{ cart.product.id }}">
                         {% csrf_token %}
                         <button type="submit" class="quantity-btn">+</button>

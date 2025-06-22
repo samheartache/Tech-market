@@ -33,7 +33,7 @@ $(document).ready(function () {
                 }
 
                 else {
-                    const amount = document.querySelector('.quantity');
+                    const amount = document.getElementById(`q - ${product_id}`);
                     amount.textContent = prodAmount;
 
                     sumPriceEl.textContent = data.sum_price

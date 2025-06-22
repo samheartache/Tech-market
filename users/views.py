@@ -5,6 +5,7 @@ from django.http import HttpResponseRedirect
 from django.urls import reverse
 
 from users.forms import LoginForm, SignUpForm, EditProfileForm
+from cart.models import Cart
 
 
 def login(request):
@@ -16,9 +17,15 @@ def login(request):
             password = request.POST['password']
             email = request.POST['email']
             user = auth.authenticate(username=username, password=password, email=email)
+
+            session_key = request.session.session_key
+
             if user:
                 auth.login(request, user)
                 
+                if session_key:
+                    Cart.objects.filter(session_key=session_key).update(user=user)
+
                 redirect_page = request.POST.get('next', None)
                 if redirect_page and redirect_page != reverse('user:logout'):
                     return HttpResponseRedirect(request.POST.get('next'))
@@ -40,7 +47,14 @@ def signup(request):
         if form.is_valid():
             form.save()
             user = form.instance
+
+            session_key = request.session.session_key
+
             auth.login(request, user)
+
+            if session_key:
+                Cart.objects.filter(session_key=session_key).update(user=user)
+
             return HttpResponseRedirect(reverse('main:index'))
     else:
         form = SignUpForm()
@@ -51,6 +65,7 @@ def signup(request):
     }
     return render(request, 'signup.html', context)
 
+
 @login_required
 def account(request):
     context = {
@@ -58,10 +73,12 @@ def account(request):
     }
     return render(request, 'account.html', context)
 
+
 @login_required
 def logout(request):
     auth.logout(request)
     return redirect(reverse('main:index'))
+
 
 @login_required
 def editprofile(request):
