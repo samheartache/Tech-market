@@ -14,10 +14,11 @@
 
 {% block content %}
 <main class="cart-container">
-    <h1 class="cart-title">Ваша корзина</h1>
     
     {% user_cart request as carts %}
     {% if carts.exists %}
+    <h1 class="cart-title">Ваша корзина</h1>
+
     <div class="cart-items">
         {% for cart in carts %}
         <div class="cart-item" id="{{ cart.product.id }}">
