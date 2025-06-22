@@ -18,6 +18,7 @@ class Cart(models.Model):
     product = models.ForeignKey(to=Product, on_delete=models.CASCADE, verbose_name='Товар')
     date_added = models.DateTimeField(auto_now_add=True, verbose_name='Время добавления')
     quantity = models.PositiveSmallIntegerField(default=0, verbose_name='Количество')
+    in_order = models.BooleanField(default=True)
 
     class Meta:
         db_table = 'cart'

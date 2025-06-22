@@ -15,15 +15,17 @@ $(document).ready(function() {
                 const cartBlock = document.getElementById(`${product_id}`);
                 cartBlock.remove();
                 const amount = data.amount;
+                const amountOrder = document.getElementById("selected-count");
 
                 if (amount === 0) {
                     const cartContainer = $('.cart-container');
-                    cartContainer.html(data.cart_page);
+                    cartContainer.html(data.emptycart_page);
                 }
 
                 else {
                     const totalPrice = document.querySelector('.total-amount');
                     totalPrice.textContent = data.total_price;
+                    amountOrder.textContent = data.amount_order;
                 }
             }
         })

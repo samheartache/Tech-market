@@ -14,8 +14,9 @@ $(document).ready(function () {
             },
             success: function(data) {
                 const prodAmount = data.product_amount;
-                const totalPriceEl = document.querySelector('.total-amount')
+                const totalPriceEl = document.querySelector(".total-amount")
                 const sumPriceEl = document.getElementById(`sum - ${product_id}`)
+                const totalAmount = document.getElementById("selected-count")
 
                 if (prodAmount === 0) {
 
@@ -39,6 +40,8 @@ $(document).ready(function () {
                     sumPriceEl.textContent = data.sum_price
                     totalPriceEl.textContent = data.total_price
                 }
+
+                totalAmount.textContent = data.amount_order
             }
         })
     })

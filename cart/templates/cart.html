@@ -10,12 +10,14 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" defer></script>
 <script src='{% static "js/delete_in_cart.js" %}' defer></script>
 <script src='{% static "js/change_cart.js" %}' defer></script>
-
+<script src='{% static "js/select_cart.js" %}' defer></script>
 {% endblock %}
 
 {% block content %}
 <main class="cart-container">
     {% user_cart request as carts %}
+    {% all_in_order_tag request as all%}
+    {% amount_in_order_tag request as amount_order%}
     {% if carts.exists %}
 
     <h1 class="cart-title">Ваша корзина</h1>
@@ -24,7 +26,7 @@
         <div class="cart-items-container">
             <div class="select-all-fixed">
                 <label class="select-all">
-                    <input type="checkbox" id="select-all" checked>
+                    <input type="checkbox" id="select-all" {% if all %} checked {% endif %}>
                     <span>Выбрать все</span>
                 </label>
             </div>
@@ -33,7 +35,8 @@
                 {% for cart in carts %}
                 <div class="cart-item" id="{{ cart.product.id }}">
                     <div class="cart-item-select">
-                        <input type="checkbox" class="item-checkbox" data-product-id="{{ cart.product.id }}" checked>
+                        <input type="checkbox" data-url="{% url "cart:change_order" %}" class="item-checkbox" data-product-id="{{ cart.product.id }}" {% if cart.in_order %} checked {% endif %}>
+                        {% csrf_token %}
                     </div>
                     <div class="cart-item-image">
                         {% if cart.product.image %}
@@ -80,7 +83,7 @@
                 <div class="summary-details">
                     <div class="summary-row">
                         <span class="summary-label">Товары:</span>
-                        <span class="summary-value"><span id="selected-count">{{ carts.count }}</span> шт</span>
+                        <span class="summary-value"><span id="selected-count">{{ amount_order }}</span> шт</span>
                     </div>
                     <div class="summary-divider"></div>
                     <div class="summary-row total-row">
