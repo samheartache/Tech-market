@@ -125,10 +125,13 @@ def change_order(request):
     total_price = price_in_order(request=request)
     amount_order = amount_in_order(request=request)
 
+    order_button = render_to_string('includes/order_button.html', request=request)
+
     response = {
         'all_flag': all_flag,
         'total_price': total_price,
         'amount_order': amount_order,
+        'order_button': order_button,
     }
 
     return JsonResponse(response)
@@ -136,6 +139,7 @@ def change_order(request):
 
 def select_all(request):
     flag = False if request.POST.get('flag') == 'false' else True
+    order_button = render_to_string('includes/order_button.html', request=request)
 
     for cart_prod in Cart.objects.filter(user=request.user):
         cart_prod.in_order = flag
@@ -148,6 +152,7 @@ def select_all(request):
         response = {
             'total_price': total_price,
             'amount_order': amount_order,
+            'order_button': order_button,
         }
     else:
         response = {

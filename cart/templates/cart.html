@@ -20,6 +20,7 @@
     {% all_in_order_tag request as all%}
     {% amount_in_order_tag request as amount_order%}
     {% price_in_order_tag request as price_order%}
+    {% is_order_valid request as is_valid %}
 
     {% if carts.exists %}
 
@@ -95,7 +96,11 @@
                         <span class="summary-value total-amount" id="total-amount">{{ price_order }} ₽</span>
                     </div>
                 </div>
-                <a href="#" class="checkout-btn">Оформить заказ</a>
+                {% if is_valid %}
+                    <div class="order-block">
+                        {% include "includes/order_button.html" %}
+                    </div>
+                {% endif %}
             </div>
         </div>
     </div>

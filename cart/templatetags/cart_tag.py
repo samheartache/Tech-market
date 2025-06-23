@@ -21,3 +21,8 @@ def amount_in_order_tag(request):
 @register.simple_tag()
 def price_in_order_tag(request):
     return price_in_order(request=request)
+
+
+@register.simple_tag()
+def is_order_valid(request):
+    return any(prod.in_order for prod in get_user_cart(request=request))

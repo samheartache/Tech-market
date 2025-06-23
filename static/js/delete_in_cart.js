@@ -16,6 +16,7 @@ $(document).ready(function() {
                 cartBlock.remove();
                 const amount = data.amount;
                 const amountOrder = document.getElementById("selected-count");
+                const orderButton = document.querySelector(".checkout-btn");
 
                 if (amount === 0) {
                     const cartContainer = $('.cart-container');
@@ -26,6 +27,9 @@ $(document).ready(function() {
                     const totalPrice = document.querySelector('.total-amount');
                     totalPrice.textContent = data.total_price;
                     amountOrder.textContent = data.amount_order;
+                    if (totalPrice.textContent === '0 ₽') {
+                        orderButton.remove()
+                    }
                 }
             }
         })

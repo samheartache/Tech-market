@@ -17,6 +17,7 @@ $(document).ready(function () {
                 const totalPriceEl = document.querySelector(".total-amount")
                 const sumPriceEl = document.getElementById(`sum - ${product_id}`)
                 const totalAmount = document.getElementById("selected-count")
+                const orderButton = document.querySelector(".checkout-btn")
 
                 if (prodAmount === 0) {
 
@@ -30,6 +31,9 @@ $(document).ready(function () {
                         cartBlock.remove();
 
                         totalPriceEl.textContent = data.total_price
+                        if (totalPriceEl.textContent === '0 ₽') {
+                            orderButton.remove()
+                        }
                     }
                 }
 

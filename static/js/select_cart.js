@@ -17,16 +17,27 @@ $(document).ready(function () {
                 const totalPrice = document.getElementById("total-amount");
                 const allPick = document.getElementById("select-all");
                 const amountOrder = document.getElementById("selected-count")
+                const orderButton = document.querySelector(".checkout-btn")
 
                 if (data.all_flag) {
+                    if (!orderButton) {
+                        $(".order-block").html(data.order_button)
+                    }
                     allPick.checked = true;
                 }
 
                 else {
+                    if (!orderButton) {
+                        $(".order-block").html(data.order_button)
+                    }
                     allPick.checked = false;
                 }
 
-                totalPrice.textContent = data.total_price
+                if (data.total_price === 0) {
+                    orderButton.remove()
+                }
+
+                totalPrice.textContent = `${data.total_price} ₽`
                 amountOrder.textContent = data.amount_order
             }
         })
