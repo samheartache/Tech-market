@@ -1,0 +1,134 @@
+{% extends "base.html" %}
+{% load static %}
+{% load cart_tag %}
+{% load order_tag %}
+
+{% block css %}
+<link rel='stylesheet' href='{% static "css/cart.css" %}'>
+<link rel='stylesheet' href='{% static "css/order.css" %}'>
+{% endblock css %}
+
+{% block content %}
+<main class="checkout-container">
+    {% user_cart request as carts %}
+    {% price_in_order_tag request as price_order %}
+    {% get_order_items request as order_items %}
+    {% amount_in_order_tag request as amount_order%}
+    
+    <h1 class="checkout-title">Оформление заказа</h1>
+    
+    <div class="checkout-content">
+        <div class="checkout-form-container">
+            <form method="post" class="checkout-form">
+                {% csrf_token %}
+                
+                <div class="form-section">
+                    <h3 class="section-title">Контактная информация</h3>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="first_name">Имя</label>
+                            <input type="text" id="first_name" name="first_name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="last_name">Фамилия</label>
+                            <input type="text" id="last_name" name="last_name" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="phone">Телефон</label>
+                            <input type="tel" id="phone" name="phone" placeholder="+7 (___) ___-__-__" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-section">
+                    <h3 class="section-title">Способ доставки</h3>
+                    <div class="delivery-options">
+                        <label class="radio-option">
+                            <input type="radio" name="delivery" value="pickup" checked>
+                            <span class="option-text">Самовывоз</span>
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="delivery" value="delivery">
+                            <span class="option-text">Доставка</span>
+                        </label>
+                    </div>
+                    
+                    <div class="delivery-address" id="delivery-address" style="display: none;">
+                        <div class="form-group">
+                            <label for="address">Адрес доставки</label>
+                            <input type="text" id="address" name="address" placeholder="Улица, дом, квартира">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-section">
+                    <h3 class="section-title">Способ оплаты</h3>
+                    <div class="payment-options">
+                        <label class="radio-option">
+                            <input type="radio" name="payment" value="cash" checked>
+                            <span class="option-text">Наличными при получении</span>
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="payment" value="online">
+                            <span class="option-text">Онлайн оплата</span>
+                        </label>
+                    </div>
+                </div>
+                
+                <button type="submit" class="submit-order">Подтвердить заказ</button>
+            </form>
+        </div>
+        
+        <div class="order-summary-container">
+            <div class="order-summary">
+                <h3 class="summary-title">Ваш заказ</h3>
+                
+                <div class="order-items">
+                    {% for prod in order_items %}
+                        {% if prod.in_order %}
+                        <div class="order-item">
+                            <div class="item-image">
+                                {% if prod.product.image %}
+                                <img src="{{ prod.product.image.url }}" alt="{{ prod.product.name }}">
+                                {% else %}
+                                <img src="{% static 'imgs/default_product.png' %}" alt="Нет изображения">
+                                {% endif %}
+                            </div>
+                            <div class="item-details">
+                                <h4 class="item-name">{{ prod.product.name }}</h4>
+                                <div class="item-meta">
+                                    <span class="item-price">{{ prod.product.price }} ₽ × {{ prod.quantity }} шт</span>
+                                    <span class="item-total">{{ prod.products_price }} ₽</span>
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+                
+                <div class="summary-totals">
+                    <div class="total-row">
+                        <span>Товары ({{ amount_order }}):</span>
+                        <span>{{ price_order }} ₽</span>
+                    </div>
+                    <div class="total-row">
+                        <span>Доставка:</span>
+                        <span id="delivery-cost">0 ₽</span>
+                    </div>
+                    <div class="total-row grand-total">
+                        <span>Итого:</span>
+                        <span id="grand-total">{{ price_order }} ₽</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock content %}
