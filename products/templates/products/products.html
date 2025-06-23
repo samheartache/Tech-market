@@ -61,7 +61,6 @@
 {% endblock aside %}
 {% block content %}
 <main>
-  {% include "includes/notifications/add_to_cart.html" %}
   {% for product in products %}
   <article>
     <section>
@@ -85,15 +84,17 @@
           <div class="buttons">
             {% is_in_cart product.id user.id as in_cart %}
             {% if in_cart %}
-                <a href="{% url 'cart:remove' %}" class="action-button remove_from_cart" data-product-id="{{ product.id }}" data-add-url="{% url 'cart:add_to_cart' %}" data-remove-url="{% url 'cart:remove' %}">
-                    {% csrf_token %}
-                    Удалить из корзины
-                </a>
+              <form method="post" action="{% url 'cart:remove' %}" class="cart-form">
+                {% csrf_token %}
+                <input type="hidden" name="product_id" value="{{ product.id }}">
+                <button type="submit" class="action-button remove_from_cart">Удалить из корзины</button>
+              </form>
             {% else %}
-                <a href="{% url 'cart:add_to_cart' %}" class="action-button add_to_cart" data-product-id="{{ product.id }}" data-add-url="{% url 'cart:add_to_cart' %}" data-remove-url="{% url 'cart:remove' %}">
-                    {% csrf_token %}
-                    Добавить в корзину
-                </a>
+              <form method="post" action="{% url 'cart:add_to_cart' %}" class="cart-form">
+                  {% csrf_token %}
+                  <input type="hidden" name="product_id" value="{{ product.id }}">
+                  <button type="submit" class="action-button add_to_cart">Добавить в корзину</button>
+              </form>
             {% endif %}
             <a href="#" class="order-button">Заказать</a>
           </div>

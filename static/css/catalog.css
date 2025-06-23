@@ -234,25 +234,6 @@ section:hover {
     border-color: #0d8dd7;
 }
 
-#jq-notification {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    padding: 15px 25px;
-    background-color: #4CAF50;
-    color: white;
-    border-radius: 4px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    z-index: 9999;
-    display: none;
-    opacity: 1;
-    transition: opacity 0.4s ease;
-}
-
-#jq-notification.fade-out {
-    opacity: 0;
-} 
-
 @media (max-width: 1200px) {
     .product_name {
         font-size: 24px;
