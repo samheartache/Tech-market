@@ -30,23 +30,39 @@
                     <h3 class="section-title">Контактная информация</h3>
                     <div class="form-row">
                         <div class="form-group">
-                            <label for="first_name">Имя</label>
-                            <input type="text" id="first_name" name="first_name" required>
+                            <label for="id_first_name">Имя</label>
+                            <input type="text" id="id_first_name" name="first_name" required
+                            value="{% if form.first_name.value %}{{form.first_name.value}}{% endif %}">
+                            {% if form.first_name.errors %}
+                            <div class="error_field">{{form.first_name.errors}}</div>
+                            {% endif %}
                         </div>
                         <div class="form-group">
-                            <label for="last_name">Фамилия</label>
-                            <input type="text" id="last_name" name="last_name" required>
+                            <label for="id_last_name">Фамилия</label>
+                            <input type="text" id="id_last_name" name="last_name" required
+                            value="{% if form.last_name.value %}{{form.last_name.value}}{% endif %}">
+                            {% if form.last_name.errors %}
+                            <div class="error_field">{{form.last_name.errors}}</div>
+                            {% endif %}
                         </div>
                     </div>
                     
                     <div class="form-row">
                         <div class="form-group">
-                            <label for="phone">Телефон</label>
-                            <input type="tel" id="phone" name="phone" placeholder="+7 (___) ___-__-__" required>
+                            <label for="id_phone_number">Телефон</label>
+                            <input type="tel" id="id_phone_number" name="phone_number" placeholder="+7 (___) ___-__-__" required
+                            value="{% if form.phone_number.value %}{{form.phone_number.value}}{% endif %}">
+                            {% if form.phone_number.errors %}
+                            <div class="error_field">{{form.phone_number.errors}}</div>
+                            {% endif %}
                         </div>
                         <div class="form-group">
-                            <label for="email">Email</label>
-                            <input type="email" id="email" name="email" required>
+                            <label for="id_email">Email</label>
+                            <input type="email" id="id_email" name="email" required
+                            value="{% if form.email.value %}{{form.email.value}}{% endif %}">
+                            {% if form.email.errors %}
+                            <div class="error_field">{{form.email.errors}}</div>
+                            {% endif %}
                         </div>
                     </div>
                 </div>
@@ -55,19 +71,22 @@
                     <h3 class="section-title">Способ доставки</h3>
                     <div class="delivery-options">
                         <label class="radio-option">
-                            <input type="radio" name="delivery" value="pickup" checked>
+                            <input type="radio" id="id_delivery" name="delivery" value="pickup" checked value="0">
                             <span class="option-text">Самовывоз</span>
                         </label>
                         <label class="radio-option">
-                            <input type="radio" name="delivery" value="delivery">
+                            <input type="radio" id="id_delivery" name="delivery" value="delivery" value="1">
                             <span class="option-text">Доставка</span>
                         </label>
                     </div>
                     
                     <div class="delivery-address" id="delivery-address" style="display: none;">
                         <div class="form-group">
-                            <label for="address">Адрес доставки</label>
-                            <input type="text" id="address" name="address" placeholder="Улица, дом, квартира">
+                            <label for="id_delivery_address">Адрес доставки</label>
+                            <input type="text" id="id_delivery_address" name="delivery_address" placeholder="Улица, дом, квартира">
+                            {% if form.delivery_address.errors %}
+                            <div class="error_field">{{form.delivery_address.errors}}</div>
+                            {% endif %}
                         </div>
                     </div>
                 </div>
@@ -76,11 +95,11 @@
                     <h3 class="section-title">Способ оплаты</h3>
                     <div class="payment-options">
                         <label class="radio-option">
-                            <input type="radio" name="payment" value="cash" checked>
+                            <input type="radio" name="payment_on_get" value="1" checked>
                             <span class="option-text">При получении</span>
                         </label>
                         <label class="radio-option">
-                            <input type="radio" name="payment" value="online">
+                            <input type="radio" name="payment_on_get" value="0">
                             <span class="option-text">Онлайн оплата</span>
                         </label>
                     </div>
