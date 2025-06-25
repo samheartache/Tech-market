@@ -24,6 +24,7 @@ class Cart(models.Model):
         db_table = 'cart'
         verbose_name = 'Корзина'
         verbose_name_plural = 'Корзину'
+        ordering = ('id',)
     
     objects = CartQuerySet.as_manager()
 
@@ -31,4 +32,6 @@ class Cart(models.Model):
         return self.quantity * self.product.price
     
     def __str__(self):
-        return f'Товар {self.product.name} в корзине {self.user.username}'
+        if self.user:
+            return f'Товар {self.product.name} в корзине {self.user.username}'
+        return f'Товар в корзине анонимного пользователя: {self.product.name}'
