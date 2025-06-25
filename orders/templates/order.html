@@ -8,6 +8,10 @@
 <link rel='stylesheet' href='{% static "css/order.css" %}'>
 {% endblock css %}
 
+{% block js %}
+<script src='{% static "js/order.js" %}' defer></script>
+{% endblock %}
+
 {% block content %}
 <main class="checkout-container">
     {% user_cart request as carts %}
