@@ -74,3 +74,13 @@ def order(request):
     }
     return render(request, 'order.html', context=context)
 
+
+def user_orders(request):
+    orders = Order.objects.filter(user=request.user.id)
+    context = {
+        'title': 'Ваши заказы',
+        'orders': orders
+    }
+
+    return render(request, 'user_orders.html', context=context)
+

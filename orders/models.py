@@ -12,6 +12,12 @@ class OrderProductQueryset(models.QuerySet):
 
 
 class Order(models.Model):
+    STATUS_CHOICES = [
+        ('processing', 'В обработке'),
+        ('delivered', 'Доставлен'),
+        ('canceled', 'Отменен'),
+    ]
+
     user = models.ForeignKey(to=User, on_delete=models.SET_DEFAULT, default=None, verbose_name='Пользователь')
     time_created = models.DateTimeField(auto_now_add=True, verbose_name='Дата оформления заказа')
     phone_number = models.CharField(max_length=20, verbose_name='Номер телефона')
@@ -19,7 +25,7 @@ class Order(models.Model):
     delivery_address = models.TextField(null=True, blank=True, verbose_name='Адрес доставки')
     payment_on_get = models.BooleanField(default=False, verbose_name='Оплата при получении')
     is_paid = models.BooleanField(default=False, verbose_name='Оплачен ли заказ')
-    status = models.CharField(max_length=50, default='В обработке', verbose_name='Статус заказа')
+    status = models.CharField(max_length=50, default='processing', choices=STATUS_CHOICES, verbose_name='Статус заказа')
 
     class Meta:
         db_table = 'order'
