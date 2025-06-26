@@ -18,8 +18,8 @@ class OrderForm(forms.Form):
         if phone[0] == '+':
             phone = phone[1:]
         
-        pattern = re.compile(r'[78]\d{10}')
-        if not pattern.match(phone):
+        pattern = r'[78]\d{10}'
+        if not re.fullmatch(pattern, phone):
             raise forms.ValidationError('Номер введен не верно')
         
         return phone
