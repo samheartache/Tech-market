@@ -7,5 +7,6 @@ class OrderForm(forms.Form):
     phone_number = forms.CharField()
     email = forms.EmailField()
     delivery_address = forms.CharField(required=False)
-    payment_on_get = forms.CharField()
+    payment_on_get = forms.ChoiceField(choices=[('0', False), ('1', True)])
+    requires_delivery = forms.ChoiceField(choices=[('0', False), ('1', True)])
     

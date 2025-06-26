@@ -36,7 +36,7 @@ class OrderProduct(models.Model):
     product = models.ForeignKey(to=Product, on_delete=models.SET_DEFAULT, default=None)
     quantity = models.PositiveIntegerField(default=0, verbose_name='Количество')
     name = models.CharField(max_length=200, verbose_name='Название продукта')
-    price = models.DecimalField(decimal_places=2, max_digits=7, verbose_name='Цена')
+    price = models.DecimalField(decimal_places=2, max_digits=10, verbose_name='Цена')
     time_created = models.DateTimeField(auto_now_add=True, verbose_name='Дата оформления заказа')
 
     class Meta:

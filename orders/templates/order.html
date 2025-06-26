@@ -16,14 +16,14 @@
 <main class="checkout-container">
     {% user_cart request as carts %}
     {% price_in_order_tag request as price_order %}
-    {% get_order_items request as order_items %}
+    {% get_order_items_tag request as order_items %}
     {% amount_in_order_tag request as amount_order%}
     
     <h1 class="checkout-title">Оформление заказа</h1>
     
     <div class="checkout-content">
         <div class="checkout-form-container">
-            <form method="post" class="checkout-form">
+            <form method="post" action="{% url "orders:order" %}" class="checkout-form">
                 {% csrf_token %}
                 
                 <div class="form-section">
@@ -71,11 +71,11 @@
                     <h3 class="section-title">Способ доставки</h3>
                     <div class="delivery-options">
                         <label class="radio-option">
-                            <input type="radio" id="id_delivery" name="delivery" value="pickup" checked value="0">
+                            <input type="radio" id="id_requires_delivery" name="requires_delivery" checked value="0">
                             <span class="option-text">Самовывоз</span>
                         </label>
                         <label class="radio-option">
-                            <input type="radio" id="id_delivery" name="delivery" value="delivery" value="1">
+                            <input type="radio" id="id_requires_delivery" name="requires_delivery" value="1">
                             <span class="option-text">Доставка</span>
                         </label>
                     </div>
