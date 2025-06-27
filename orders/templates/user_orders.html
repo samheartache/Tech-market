@@ -4,7 +4,13 @@
 
 {% block css %}
 <link rel="stylesheet" href='{% static "css/user_orders.css" %}' />
-{% endblock css %} 
+{% endblock css %}
+
+{% block js %}
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" defer></script>
+<script src='{% static "js/cancel_order.js" %}' defer></script>
+<script src='{% static "js/repeat_order.js" %}' defer></script>
+{% endblock js %}
 
 {% block content %}
 <main class="orders-container">
@@ -18,7 +24,7 @@
                     <div class="order-info">
                         <span class="order-date">Заказ от {{ order.time_created|date:"d.m.Y H:i" }}</span>
                     </div>
-                    <div 
+                    <div id="status-{{ order.id }}"
                     class={% if order.status == 'В обработке' %}"order-status status-processing"{% elif order.status == 'Доставлен' %}"order-status status-delivered"{% elif order.status == 'Отменён' %}"order-status status-cancelled"{% endif %}>
                         {{ order.status }}
                     </div>
@@ -56,14 +62,14 @@
                         </div>
                         <div class="summary-row">
                             {% if order.status == 'В обработке' %}
-                                <span>Примерное время доставки:</span>
-                                <span>(функция для подсчета времени доставки)</span>
+                                <span id="datetext-{{ order.id }}">Примерное время доставки:</span>
+                                <span id="time-{{ order.id }}">(функция для подсчета времени доставки)</span>
                             {% elif order.status == 'Доставлен' %}
                                 <span>Дата доставки:</span>
                                 <span>Дата доставки (из бд)</span>
                             {% elif order.status == 'Отменён' %}
-                                <span>Дата отмены заказа:</span>
-                                <span>Дата отмены (из бд)</span>
+                                <span id="datetext-{{ order.id }}">Дата отмены заказа:</span>
+                                <span id="time-{{ order.id }}">{{ order.cancellation_date|date:"d.m.Y H:i" }}</span>
                             {% endif %}
                         </div>
                     </div>
@@ -72,9 +78,13 @@
                 <div class="order-actions">
                     <button class="btn btn-details">Подробнее</button>
                     {% if order.status == 'В обработке' %}
-                        <button class="btn btn-cancel">Отменить заказ</button>
+                        <a data-url-cancel="{% url "orders:cancel" %}" data-order-id={{ order.id }} data-url-repeat="{% url "orders:repeat" %}" class="cancel"><button class="btn btn-cancel" id="{{ order.id }}">
+                            {% csrf_token %}
+                            Отменить заказ</button></a>
                     {% elif order.status == 'Отменён' %}
-                        <button class="btn btn-repeat">Повторить заказ</button>
+                        <a data-url-cancel="{% url "orders:cancel" %}" data-order-id={{ order.id }} data-url-repeat="{% url "orders:repeat" %}" class="repeat"><button class="btn btn-repeat" id="{{ order.id }}">
+                            {% csrf_token %}
+                            Повторить заказ</button></a>
                     {% endif %}
                 </div>
             </div>

@@ -25,13 +25,14 @@ class Order(models.Model):
     delivery_address = models.TextField(null=True, blank=True, verbose_name='Адрес доставки')
     payment_on_get = models.BooleanField(default=False, verbose_name='Оплата при получении')
     is_paid = models.BooleanField(default=False, verbose_name='Оплачен ли заказ')
-    status = models.CharField(max_length=50, default='processing', choices=STATUS_CHOICES, verbose_name='Статус заказа')
+    status = models.CharField(max_length=50, default='В обработке', choices=STATUS_CHOICES, verbose_name='Статус заказа')
+    cancellation_date = models.DateTimeField(null=True, blank=True)
 
     class Meta:
         db_table = 'order'
         verbose_name = 'Заказ'
         verbose_name_plural = 'Заказы'
-        ordering = ('id',)
+        ordering = ('-time_created',)
 
     def __str__(self):
         return f'Заказ №{self.id} Пользователя: {self.user.username} ({self.user.first_name} {self.user.last_name})'

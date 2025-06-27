@@ -1,6 +1,8 @@
+from django.http import JsonResponse
 from django.shortcuts import render, redirect
 from django.forms import ValidationError
 from django.db import transaction
+from django.utils import timezone
 
 from orders.forms import OrderForm
 from orders.utils import get_order_items
@@ -77,11 +79,39 @@ def order(request):
 
 def user_orders(request):
     orders = Order.objects.filter(user=request.user.id)
-    
+
     context = {
         'title': 'Ваши заказы',
         'orders': orders
     }
 
     return render(request, 'user_orders.html', context=context)
+
+
+def cancel(request):
+    order_id = request.POST.get('order_id')
+    order = Order.objects.get(id=order_id)
+
+    order.status ='Отменён'
+    order.cancellation_date = timezone.now()
+    order.save()
+
+    response = {
+        "cancellation_date": order.cancellation_date.strftime("%d.%m.%Y %H:%M")
+    }
+    return JsonResponse(response)
+
+
+def repeat(request):
+    order_id = request.POST.get('order_id')
+    order = Order.objects.get(id=order_id)
+
+    order.status = 'В обработке'
+    order.save()
+
+    response = {
+        "delivery_date": "(функция для подсчета времени доставки)",
+    }
+
+    return JsonResponse(response)
 
