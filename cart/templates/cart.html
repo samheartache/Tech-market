@@ -96,11 +96,11 @@
                         <span class="summary-value total-amount" id="total-amount">{{ price_order }} ₽</span>
                     </div>
                 </div>
-                {% if is_valid %}
                     <div class="order-block">
-                        {% include "includes/order_button.html" %}
+                        {% if is_valid %}
+                            {% include "includes/order_button.html" %}
+                        {% endif %}
                     </div>
-                {% endif %}
             </div>
         </div>
     </div>

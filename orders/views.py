@@ -77,6 +77,7 @@ def order(request):
 
 def user_orders(request):
     orders = Order.objects.filter(user=request.user.id)
+    
     context = {
         'title': 'Ваши заказы',
         'orders': orders
