@@ -8,5 +8,4 @@ urlpatterns = [
     path('userorders/', views.user_orders, name='userorders'),
     path('cancel/', views.cancel, name='cancel'),
     path('repeat/', views.repeat, name='repeat'),
-
 ]

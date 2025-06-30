@@ -18,7 +18,6 @@
 
   <div class="orders-list">
     {% for order in orders %}
-        {% get_order_products_tag order.id as order_products %}
         <div class="order-card">
                 <div class="order-header">
                     <div class="order-info">
@@ -32,7 +31,7 @@
                 
                 <div class="order-content">
                     <div class="order-items">
-                        {% for order_product in order_products %}
+                        {% for order_product in order.orderproduct_set.all %}
                             <div class="order-item">
                                 <div class="item-image">
                                     <img src="{{ order_product.product.image.url }}" alt="Товар">
@@ -49,8 +48,8 @@
                     
                     <div class="order-summary">
                         <div class="summary-row">
-                            <span>Товары ({{ order_products.count }}):</span>
-                            <span>{{ order_products.total_price }} ₽</span>
+                            <span>Товары ({{ order.orderproduct_set.all.count }}):</span>
+                            <span>{{ order.orderproduct_set.all.total_price }} ₽</span>
                         </div>
                         <div class="summary-row">
                             <span>Доставка:</span>
@@ -58,7 +57,7 @@
                         </div>
                         <div class="summary-row total">
                             <span>Итого:</span>
-                            <span>{{ order_products.total_price }} ₽</span>
+                            <span>{{ order.orderproduct_set.all.total_price }} ₽</span>
                         </div>
                         <div class="summary-row">
                             {% if order.status == 'В обработке' %}

@@ -3,6 +3,7 @@ from django.shortcuts import render, redirect
 from django.forms import ValidationError
 from django.db import transaction
 from django.utils import timezone
+from django.db.models import Prefetch
 
 from orders.forms import OrderForm
 from orders.utils import get_order_items
@@ -78,7 +79,7 @@ def order(request):
 
 
 def user_orders(request):
-    orders = Order.objects.filter(user=request.user.id)
+    orders = Order.objects.filter(user=request.user.id).prefetch_related(Prefetch("orderproduct_set", queryset=OrderProduct.objects.select_related('product')))
 
     context = {
         'title': 'Ваши заказы',
