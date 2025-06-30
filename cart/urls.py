@@ -5,10 +5,10 @@ from cart import views
 app_name = 'cart'
 
 urlpatterns = [
-    path('add_to_cart/', views.add_to_cart, name='add_to_cart'),
-    path('mycart/', views.cart, name='cart'),
-    path('remove/', views.remove, name='remove'),
-    path('decrease/', views.decrease, name='decrease'),
-    path('change_order/', views.change_order, name='change_order'),
-    path('select_all/', views.select_all, name='select_all'),
+    path('add_to_cart/', views.AddToCartView.as_view(), name='add_to_cart'),
+    path('mycart/', views.CartView.as_view(), name='cart'),
+    path('remove/', views.RemoveFromCartView.as_view(), name='remove'),
+    path('decrease/', views.DecreaseCartView.as_view(), name='decrease'),
+    path('change_order/', views.ChangeOrderItemsView.as_view(), name='change_order'),
+    path('select_all/', views.SelectAllInCartView.as_view(), name='select_all'),
 ]
