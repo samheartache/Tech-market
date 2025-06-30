@@ -12,6 +12,7 @@ class ProductsView(ListView):
     context_object_name = 'products'
     slug_url_kwarg = 'category_slug'
     paginate_by = 6
+    allow_empty = False
 
     def get_queryset(self):
         category_slug = self.kwargs.get(self.slug_url_kwarg)

@@ -2,43 +2,39 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.contrib import auth
 from django.http import HttpResponseRedirect
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
+from django.contrib.auth.views import LoginView
 
 from users.forms import LoginForm, SignUpForm, EditProfileForm
 from cart.models import Cart
 
 
-def login(request):
+class UserLogin(LoginView):
+    template_name = 'login.html'
+    form_class = LoginForm
 
-    if request.method == 'POST':
-        form = LoginForm(data=request.POST)
-        if form.is_valid():
-            username = request.POST['username']
-            password = request.POST['password']
-            email = request.POST['email']
-            user = auth.authenticate(username=username, password=password, email=email)
+    def get_success_url(self):
+        redirected_page = self.request.POST.get('next', None)
+        if redirected_page and redirected_page != reverse_lazy('user:logout'):
+            return redirected_page
+        return reverse_lazy('main:index')
+    
+    def form_valid(self, form):
+        session_key = self.request.session.session_key
+        user = form.get_user()
 
-            session_key = request.session.session_key
-
-            if user:
-                auth.login(request, user)
-                
+        if user:
+            auth.login(self.request, user)
+            if session_key:
                 if session_key:
                     Cart.objects.filter(session_key=session_key).update(user=user)
 
-                redirect_page = request.POST.get('next', None)
-                if redirect_page and redirect_page != reverse('user:logout'):
-                    return HttpResponseRedirect(request.POST.get('next'))
-                
-                return HttpResponseRedirect(reverse('main:index'))
-    else:
-        form = LoginForm()
-    
-    context = {
-        'title': 'Вход в аккаунт',
-        'form': form,
-    }
-    return render(request, 'login.html', context)
+                    return HttpResponseRedirect(self.get_success_url())
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Вход в аккаунт'
+        return context
 
 
 def signup(request):
