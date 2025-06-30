@@ -103,31 +103,31 @@
     </section>
   </article>
   {% endfor %}
-  {% if products.paginator.num_pages > 1 %}
+  {% if page_obj.paginator.num_pages > 1 %}
   <nav class="paginaton__nav">
     <ul>
-        <li class="page_item {% if not products.has_previous %}disabled{% endif %}">
-            <a href="{% if products.has_previous %}
-            ?{% proper_url page=products.previous_page_number %}
+        <li class="page_item {% if not page_obj.has_previous %}disabled{% endif %}">
+            <a href="{% if page_obj.has_previous %}
+            ?{% proper_url page=page_obj.previous_page_number %}
             {% else %}
             #
             {% endif %}"
              class="page_url">Назад</a>
         </li>
-        {% for page in products.paginator.page_range %}
-        {% if page == 1 or page == products.paginator.num_pages or page >= products.number|add:-2 and page <= products.number|add:2 %}
-          <li class="page_item {% if products.number == page %}disabled{% endif %}">
+        {% for page in page_obj.paginator.page_range %}
+        {% if page == 1 or page == page_obj.paginator.num_pages or page >= page_obj.number|add:-2 and page <= page_obj.number|add:2 %}
+          <li class="page_item {% if page_obj.number == page %}disabled{% endif %}">
             <a href="?{% proper_url page=page %}" class="page_url">{{ page }}</a>
           </li>
-        {% elif page == products.number|add:-3 or page == products.number|add:3 %}
+        {% elif page == page_obj.number|add:-3 or page == page_obj.number|add:3 %}
           <li class="page_item disabled">
             <span class="page_url">...</span>
           </li>
         {% endif %}
       {% endfor %}      
-        <li class="page_item {% if not products.has_next %}disabled{% endif %}">
-          <a href="{% if products.has_next %}
-          ?{% proper_url page=products.next_page_number %}
+        <li class="page_item {% if not page_obj.has_next %}disabled{% endif %}">
+          <a href="{% if page_obj.has_next %}
+          ?{% proper_url page=page_obj.next_page_number %}
           {% else %}
           #
           {% endif %}"
