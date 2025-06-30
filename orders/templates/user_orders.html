@@ -73,18 +73,28 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="order-actions">
                     <button class="btn btn-details">Подробнее</button>
+
                     {% if order.status == 'В обработке' %}
-                        <a data-url-cancel="{% url "orders:cancel" %}" data-order-id={{ order.id }} data-url-repeat="{% url "orders:repeat" %}" class="cancel"><button class="btn btn-cancel" id="{{ order.id }}">
-                            {% csrf_token %}
-                            Отменить заказ</button></a>
+                        <button class="btn btn-cancel cancel"
+                                id="{{ order.id }}"
+                                data-url-cancel="{% url 'orders:cancel' %}"
+                                data-order-id="{{ order.id }}"
+                                data-url-repeat="{% url 'orders:repeat' %}">
+                            Отменить заказ
+                        </button>
                     {% elif order.status == 'Отменён' %}
-                        <a data-url-cancel="{% url "orders:cancel" %}" data-order-id={{ order.id }} data-url-repeat="{% url "orders:repeat" %}" class="repeat"><button class="btn btn-repeat" id="{{ order.id }}">
-                            {% csrf_token %}
-                            Повторить заказ</button></a>
+                        <button class="btn btn-repeat repeat"
+                                id="{{ order.id }}"
+                                data-url-cancel="{% url 'orders:cancel' %}"
+                                data-order-id="{{ order.id }}"
+                                data-url-repeat="{% url 'orders:repeat' %}">
+                            Повторить заказ
+                        </button>
                     {% endif %}
+                    <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
                 </div>
             </div>
     {% endfor %}
