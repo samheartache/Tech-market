@@ -9,6 +9,7 @@
 {% block js %}
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" defer></script>
 <script src='{% static "js/ajax.js" %}' defer></script>
+<script src='{% static "js/create_review.js" %}' defer></script>
 {% endblock js %}
 
 {% block content %}
@@ -51,29 +52,15 @@
   <div class="reviews-section">
     <h2>Отзывы</h2>
     <div class="reviews-list">
-      {% for review in product.reviews.all %}
-        <div class="review">
-          <div class="review-header">
-            <span class="review-author">{{ review.user.username }}</span>
-            <span class="review-date">{{ review.created_at|date:"d.m.Y" }}</span>
-            <div class="review-rating">
-              {% for i in "12345" %}
-                <span class="star{% if forloop.counter <= review.rating %} filled{% endif %}">★</span>
-              {% endfor %}
-            </div>
-          </div>
-          <div class="review-text">{{ review.text }}</div>
-        </div>
-      {% empty %}
-        <p class="no-reviews">Пока нет отзывов. Будьте первым!</p>
-      {% endfor %}
+      {% include "includes/include_reviews.html" %}
     </div>
     
     {% if user.is_authenticated %}
     <div class="add-review">
       <h3>Оставить отзыв</h3>
-      <form method="post" action="#">
+      <form method="post" action="{% url "user:sendreview" %}">
         {% csrf_token %}
+        <input type="hidden" name="product_id" value="{{product.id}}">
         <div class="rating-selector">
           <label>Оценка:</label>
           <select name="rating">
@@ -84,7 +71,7 @@
             <option value="1">1 ★</option>
           </select>
         </div>
-        <textarea name="text" placeholder="Ваш отзыв..." required></textarea>
+        <textarea name="text" placeholder="Ваш отзыв..."></textarea>
         <button type="submit" class="btn submit-review">Отправить отзыв</button>
       </form>
     </div>
