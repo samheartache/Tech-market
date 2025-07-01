@@ -1,20 +1,27 @@
 {% load static %}
 
 {% if reviews %}
-
     {% for review in reviews %}
         <div class="review">
-            <div class="review-header">
-                <span class="review-author">{{ review.user.username }}</span>
-                <span class="review-date">{{ review.time_created|date:"d.m.Y" }}</span>
-                <div class="review-rating">
-                {% for i in "12345" %}
-                    <span class="star{% if forloop.counter <= review.rating %} filled{% endif %}">★</span>
-                {% endfor %}
+            {% if review.user.avatar %}
+            <img src="{{ review.user.avatar.url }}" alt="{{ review.user.username }}" class="review-avatar">
+            {% else %}
+            <img src="{% static 'imgs/default_ava.png' %}" alt="{{ review.user.username }}" class="review-avatar">
+            {% endif %}
+            
+            <div class="review-content">
+                <div class="review-header">
+                    <span class="review-author">{{ review.user.username }}</span>
+                    <span class="review-date">{{ review.time_created|date:"d.m.Y H:i" }}</span>
+                    <div class="review-rating">
+                    {% for i in "12345" %}
+                        <span class="star{% if forloop.counter <= review.rating %} filled{% endif %}">★</span>
+                    {% endfor %}
+                    </div>
                 </div>
+                <div class="review-text">{{ review.content }}</div>
             </div>
-            <div class="review-text">{{ review.content }}</div>
-            </div>
+        </div>
     {% endfor %}
 {% else %}
     <p class="no-reviews">Пока нет отзывов. Будьте первым!</p>
