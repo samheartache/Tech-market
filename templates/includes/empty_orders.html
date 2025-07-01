@@ -1,0 +1,9 @@
+{% load static %}
+
+<div class="empty-orders-container">
+    <div class="empty-orders-content">
+        <img src="{% static 'imgs/no-order.png' %}" alt="Нет заказов" class="empty-orders-image">
+        <h2 class="empty-orders-title">У вас пока нет заказов</h2>
+        <a href="{% url 'products:products' 'all' %}" class="btn continue-shopping">Продолжить покупки</a>
+    </div>
+</div>

@@ -16,88 +16,93 @@
 <main class="orders-container">
   <h1 class="orders-title">Ваши заказы</h1>
 
-  <div class="orders-list">
-    {% for order in orders %}
-        <div class="order-card">
-                <div class="order-header">
-                    <div class="order-info">
-                        <span class="order-date">Заказ от {{ order.time_created|date:"d.m.Y H:i" }}</span>
-                    </div>
-                    <div id="status-{{ order.id }}"
-                    class={% if order.status == 'В обработке' %}"order-status status-processing"{% elif order.status == 'Доставлен' %}"order-status status-delivered"{% elif order.status == 'Отменён' %}"order-status status-cancelled"{% endif %}>
-                        {{ order.status }}
-                    </div>
-                </div>
-                
-                <div class="order-content">
-                    <div class="order-items">
-                        {% for order_product in order.orderproduct_set.all %}
-                            <div class="order-item">
-                                <div class="item-image">
-                                    <img src="{{ order_product.product.image.url }}" alt="Товар">
-                                </div>
-                                <div class="item-details">
-                                    <h4 class="item-name">{{ order_product.name }}</h4>
-                                    <div class="item-meta">
-                                        <span class="item-price">{{ order_product.price }} ₽ × {{ order_product.quantity }}</span>
-                                    </div>
-                                </div>
-                            </div>
-                        {% endfor %}
+  {% if orders %}
+
+    <div class="orders-list">
+        {% for order in orders %}
+            <div class="order-card">
+                    <div class="order-header">
+                        <div class="order-info">
+                            <span class="order-date">Заказ от {{ order.time_created|date:"d.m.Y H:i" }}</span>
+                        </div>
+                        <div id="status-{{ order.id }}"
+                        class={% if order.status == 'В обработке' %}"order-status status-processing"{% elif order.status == 'Доставлен' %}"order-status status-delivered"{% elif order.status == 'Отменён' %}"order-status status-cancelled"{% endif %}>
+                            {{ order.status }}
+                        </div>
                     </div>
                     
-                    <div class="order-summary">
-                        <div class="summary-row">
-                            <span>Товары ({{ order.orderproduct_set.all.count }}):</span>
-                            <span>{{ order.orderproduct_set.all.total_price }} ₽</span>
+                    <div class="order-content">
+                        <div class="order-items">
+                            {% for order_product in order.orderproduct_set.all %}
+                                <div class="order-item">
+                                    <div class="item-image">
+                                        <img src="{{ order_product.product.image.url }}" alt="Товар">
+                                    </div>
+                                    <div class="item-details">
+                                        <h4 class="item-name">{{ order_product.name }}</h4>
+                                        <div class="item-meta">
+                                            <span class="item-price">{{ order_product.price }} ₽ × {{ order_product.quantity }}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
                         </div>
-                        <div class="summary-row">
-                            <span>Доставка:</span>
-                            <span>(функция для подсчета цены доставки)</span>
-                        </div>
-                        <div class="summary-row total">
-                            <span>Итого:</span>
-                            <span>{{ order.orderproduct_set.all.total_price }} ₽</span>
-                        </div>
-                        <div class="summary-row">
-                            {% if order.status == 'В обработке' %}
-                                <span id="datetext-{{ order.id }}">Примерное время доставки:</span>
-                                <span id="time-{{ order.id }}">(функция для подсчета времени доставки)</span>
-                            {% elif order.status == 'Доставлен' %}
-                                <span>Дата доставки:</span>
-                                <span>Дата доставки (из бд)</span>
-                            {% elif order.status == 'Отменён' %}
-                                <span id="datetext-{{ order.id }}">Дата отмены заказа:</span>
-                                <span id="time-{{ order.id }}">{{ order.cancellation_date|date:"d.m.Y H:i" }}</span>
-                            {% endif %}
+                        
+                        <div class="order-summary">
+                            <div class="summary-row">
+                                <span>Товары ({{ order.orderproduct_set.all.count }}):</span>
+                                <span>{{ order.orderproduct_set.all.total_price }} ₽</span>
+                            </div>
+                            <div class="summary-row">
+                                <span>Доставка:</span>
+                                <span>(функция для подсчета цены доставки)</span>
+                            </div>
+                            <div class="summary-row total">
+                                <span>Итого:</span>
+                                <span>{{ order.orderproduct_set.all.total_price }} ₽</span>
+                            </div>
+                            <div class="summary-row">
+                                {% if order.status == 'В обработке' %}
+                                    <span id="datetext-{{ order.id }}">Примерное время доставки:</span>
+                                    <span id="time-{{ order.id }}">(функция для подсчета времени доставки)</span>
+                                {% elif order.status == 'Доставлен' %}
+                                    <span>Дата доставки:</span>
+                                    <span>Дата доставки (из бд)</span>
+                                {% elif order.status == 'Отменён' %}
+                                    <span id="datetext-{{ order.id }}">Дата отмены заказа:</span>
+                                    <span id="time-{{ order.id }}">{{ order.cancellation_date|date:"d.m.Y H:i" }}</span>
+                                {% endif %}
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="order-actions">
-                    <button class="btn btn-details">Подробнее</button>
+                    <div class="order-actions">
+                        <button class="btn btn-details">Подробнее</button>
 
-                    {% if order.status == 'В обработке' %}
-                        <button class="btn btn-cancel cancel"
-                                id="{{ order.id }}"
-                                data-url-cancel="{% url 'orders:cancel' %}"
-                                data-order-id="{{ order.id }}"
-                                data-url-repeat="{% url 'orders:repeat' %}">
-                            Отменить заказ
-                        </button>
-                    {% elif order.status == 'Отменён' %}
-                        <button class="btn btn-repeat repeat"
-                                id="{{ order.id }}"
-                                data-url-cancel="{% url 'orders:cancel' %}"
-                                data-order-id="{{ order.id }}"
-                                data-url-repeat="{% url 'orders:repeat' %}">
-                            Повторить заказ
-                        </button>
-                    {% endif %}
-                    <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
+                        {% if order.status == 'В обработке' %}
+                            <button class="btn btn-cancel cancel"
+                                    id="{{ order.id }}"
+                                    data-url-cancel="{% url 'orders:cancel' %}"
+                                    data-order-id="{{ order.id }}"
+                                    data-url-repeat="{% url 'orders:repeat' %}">
+                                Отменить заказ
+                            </button>
+                        {% elif order.status == 'Отменён' %}
+                            <button class="btn btn-repeat repeat"
+                                    id="{{ order.id }}"
+                                    data-url-cancel="{% url 'orders:cancel' %}"
+                                    data-order-id="{{ order.id }}"
+                                    data-url-repeat="{% url 'orders:repeat' %}">
+                                Повторить заказ
+                            </button>
+                        {% endif %}
+                        <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
+                    </div>
                 </div>
-            </div>
-    {% endfor %}
-  </div>
+        {% endfor %}
+    </div>
+  {% else %}
+    {% include "includes/empty_orders.html" %}
+  {% endif %}
 </main>
 {% endblock content %}
