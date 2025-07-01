@@ -1,5 +1,5 @@
 from django.http import JsonResponse
-from django.shortcuts import render, redirect
+from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.forms import ValidationError
 from django.db import transaction
@@ -8,11 +8,13 @@ from django.db.models import Prefetch
 from django.views.generic import FormView, TemplateView
 from django.views import View
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.core.cache import cache
 
 from orders.forms import OrderForm
 from orders.utils import get_order_items
 from orders.models import Order, OrderProduct
 from users.models import User
+from global_utils.mixins import CacheMixin
 
 
 class MakeOrderView(LoginRequiredMixin, FormView):
@@ -84,13 +86,15 @@ class MakeOrderView(LoginRequiredMixin, FormView):
         return context
 
 
-class UserOrdersView(TemplateView):
+class UserOrdersView(CacheMixin, TemplateView):
     template_name = 'user_orders.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Ваши заказы'
-        context['orders'] = Order.objects.filter(user=self.request.user.id).prefetch_related(Prefetch("orderproduct_set", queryset=OrderProduct.objects.select_related('product')))
+
+        orders = Order.objects.filter(user=self.request.user.id).prefetch_related(Prefetch("orderproduct_set", queryset=OrderProduct.objects.select_related('product')))
+        context['orders'] = self.cache_data(orders, f'user_id{self.request.user.id}_orders', 2 * 60)
         return context
 
 
