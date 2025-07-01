@@ -1,23 +1,98 @@
 {% extends "base.html" %}
 {% load static %}
+{% load products_tags %}
+
 {% block css %}
   <link rel="stylesheet" href='{% static "css/product.css" %}' />
 {% endblock %}
+
+{% block js %}
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" defer></script>
+<script src='{% static "js/ajax.js" %}' defer></script>
+{% endblock js %}
+
+
+
 {% block content %}
-<div class="product-container">
-    <div class="product-image">
-      <img src="{{ product.image.url }}" alt="{{ product.name }}">
+<div class="product-wrapper">
+  <div class="product-main">
+    <div class="product-gallery">
+      <div class="main-image">
+        <img src="{{ product.image.url }}" alt="{{ product.name }}">
+      </div>
     </div>
-    <div class="desc">
-        <div class="product-name">{{ product.name }}</div>
-        <div class="product-description">{{ product.description }}</div>
-        <div class="else">
-            <div class="product-price">{{ product.price }} ₽</div>
-            <div class="buttons">
-            <button>Добавить в корзину</button>
-            <button>Заказать</button>
+    <div class="product-info">
+      <h1 class="product-title">{{ product.name }}</h1>
+      <div class="product-meta">
+        <div class="price">{{ product.price }} ₽</div>
+        <div class="actions">
+          {% is_in_cart product.id user.id as in_cart %}
+          {% if in_cart %}
+            <form method="post" action="{% url 'cart:remove' %}" class="cart-form">
+              {% csrf_token %}
+              <input type="hidden" name="product_id" value="{{ product.id }}">
+              <button type="submit" class="btn remove_from_cart">Удалить из корзины</button>
+            </form>
+          {% else %}
+            <form method="post" action="{% url 'cart:add_to_cart' %}" class="cart-form">
+                {% csrf_token %}
+                <input type="hidden" name="product_id" value="{{ product.id }}">
+                <button type="submit" class="btn add_to_cart">Добавить в корзину</button>
+            </form>
+          {% endif %}
+          <a href="#" class="btn order-now">Заказать</a>
         </div>
-    </div>
+      </div>
+      <div class="product-description">
+        <h2>Описание</h2>
+        <p>{{ product.description }}</p>
+      </div>
     </div>
   </div>
+
+  <div class="reviews-section">
+    <h2>Отзывы</h2>
+    <div class="reviews-list">
+      {% for review in product.reviews.all %}
+        <div class="review">
+          <div class="review-header">
+            <span class="review-author">{{ review.user.username }}</span>
+            <span class="review-date">{{ review.created_at|date:"d.m.Y" }}</span>
+            <div class="review-rating">
+              {% for i in "12345" %}
+                <span class="star{% if forloop.counter <= review.rating %} filled{% endif %}">★</span>
+              {% endfor %}
+            </div>
+          </div>
+          <div class="review-text">{{ review.text }}</div>
+        </div>
+      {% empty %}
+        <p class="no-reviews">Пока нет отзывов. Будьте первым!</p>
+      {% endfor %}
+    </div>
+    
+    {% if user.is_authenticated %}
+    <div class="add-review">
+      <h3>Оставить отзыв</h3>
+      <form method="post" action="#">
+        {% csrf_token %}
+        <div class="rating-selector">
+          <label>Оценка:</label>
+          <select name="rating">
+            <option value="5">5 ★</option>
+            <option value="4">4 ★</option>
+            <option value="3">3 ★</option>
+            <option value="2">2 ★</option>
+            <option value="1">1 ★</option>
+          </select>
+        </div>
+        <textarea name="text" placeholder="Ваш отзыв..." required></textarea>
+        <button type="submit" class="btn submit-review">Отправить отзыв</button>
+      </form>
+    </div>
+    {% else %}
+      <p class="login-to-review">Чтобы оставить отзыв, пожалуйста <a href="{% url 'users:login' %}">войдите</a>.</p>
+    {% endif %}
+  </div>
+</div>
 {% endblock %}

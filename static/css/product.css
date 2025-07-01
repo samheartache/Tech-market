@@ -1,85 +1,316 @@
 body {
-  background: url("../imgs/logreg_bg.jpeg") 0 0 / cover fixed;
-  height: 100vh;
-  position: absolute;
-  top: 0;
+    background: url('../imgs/logreg_bg.jpeg') 0 0 /cover fixed;
+    min-height: 100vh;
 }
 
-.product-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  width: 80vw;
-  margin: 0 200px;
-  background: #fff;
-}
-
-.desc {
+.product-wrapper {
+    min-height: 100vh;
+    margin: 100px 50px 300px 300px;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(40px);
     display: flex;
     flex-direction: column;
-    background: rgb(255, 255, 255);
+    align-items: center;
+    padding: 30px;
 }
 
-.else {
-    background: #ffffff;
+.product-main {
+    width: 100%;
+    max-width: 1200px;
+    background-color: #fff;
+    border-radius: 20px;
+    padding: 30px;
+    display: flex;
+    gap: 40px;
+    margin-bottom: 30px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
 }
 
-.product-image img {
-  max-width: 450px;
-  height: auto;
-  border-radius: 12px;
+.product-gallery {
+    flex: 1;
+    max-width: 500px;
+}
+
+.main-image {
+    width: 100%;
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+.main-image img {
+    width: 100%;
+    height: auto;
+    display: block;
 }
 
 .product-info {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  flex-grow: 1;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
 }
 
-.product-name {
-  font-size: 32px;
-  font-weight: bold;
-  margin-bottom: 20px;
+.product-title {
+    font-size: 32px;
+    margin-bottom: 20px;
+    color: #333;
 }
 
-.product-description {
-  font-size: 18px;
-  color: #555;
-  margin-bottom: 30px;
+.product-meta {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #eee;
 }
 
-.product-price {
-  font-size: 28px;
-  font-weight: bold;
-  margin-bottom: 20px;
+.price {
+    font-size: 28px;
+    font-weight: bold;
+    color: #0d8dd7;
+    margin-bottom: 20px;
 }
 
-.product-buttons {
-  display: flex;
-  margin: 20px;
+.actions {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
 }
 
-.product-buttons button {
-  padding: 15px 25px;
-  font-size: 18px;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: 0.3s;
+.btn {
+    border-radius: 15px;
+    padding: 12px 25px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: transform 0.2s, background 0.2s;
+    border: none;
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
+    font-family: inherit;
 }
 
-.add-to-cart {
-  background: #ffb703;
-  color: #fff;
+.add_to_cart {
+    background: #0bc12d;
+    color: #fff;
+}
+
+.add_to_cart:hover {
+    transform: scale(1.04);
+    background: #0aa53b;
+}
+
+.remove_from_cart {
+    background: #ec0a0a;
+    color: #fff;
+}
+
+.remove_from_cart:hover {
+    transform: scale(1.04);
+    background: #a50a0a;
 }
 
 .order-now {
-  background: #219ebc;
-  color: #fff;
+    background: #0d8dd7;
+    color: #fff;
 }
 
-.product-buttons button:hover {
-  opacity: 0.8;
+.order-now:hover {
+    transform: scale(1.04);
+    background: #0a6da5;
+}
+
+.product-description {
+    margin-top: 20px;
+}
+
+.product-description h2 {
+    font-size: 24px;
+    margin-bottom: 15px;
+    color: #333;
+}
+
+.product-description p {
+    line-height: 1.6;
+    color: #555;
+}
+
+.reviews-section {
+    width: 100%;
+    max-width: 1200px;
+    background-color: #fff;
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.reviews-section h2 {
+    font-size: 28px;
+    margin-bottom: 25px;
+    color: #333;
+}
+
+.reviews-list {
+    margin-bottom: 30px;
+}
+
+.review {
+    padding: 20px;
+    border-bottom: 1px solid #eee;
+    margin-bottom: 15px;
+}
+
+.review-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.review-author {
+    font-weight: bold;
+    color: #333;
+}
+
+.review-date {
+    color: #888;
+    font-size: 14px;
+}
+
+.review-rating {
+    margin-left: auto;
+}
+
+.star {
+    color: #ddd;
+    font-size: 18px;
+}
+
+.star.filled {
+    color: #ffb703;
+}
+
+.review-text {
+    line-height: 1.5;
+    color: #555;
+}
+
+.no-reviews {
+    color: #888;
+    text-align: center;
+    padding: 20px;
+}
+
+.add-review {
+    margin-top: 30px;
+}
+
+.add-review h3 {
+    font-size: 22px;
+    margin-bottom: 15px;
+    color: #333;
+}
+
+.rating-selector {
+    margin-bottom: 15px;
+}
+
+.rating-selector select {
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+}
+
+textarea {
+    width: 100%;
+    min-height: 120px;
+    padding: 15px;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    margin-bottom: 15px;
+    font-family: inherit;
+    resize: vertical;
+}
+
+.submit-review {
+    background: #0d8dd7;
+    color: #fff;
+}
+
+.submit-review:hover {
+    background: #0a6da5;
+}
+
+.login-to-review {
+    text-align: center;
+    color: #555;
+}
+
+.login-to-review a {
+    color: #0d8dd7;
+    text-decoration: none;
+}
+
+.login-to-review a:hover {
+    text-decoration: underline;
+}
+
+@media (max-width: 1200px) {
+    .product-wrapper {
+        margin-left: 250px;
+    }
+}
+
+@media (max-width: 992px) {
+    .product-main {
+        flex-direction: column;
+    }
+    
+    .product-gallery {
+        max-width: 100%;
+    }
+    
+    .product-wrapper {
+        margin: 100px 30px 200px 200px;
+    }
+}
+
+@media (max-width: 768px) {
+    .product-wrapper {
+        margin: 80px 20px 150px 20px;
+    }
+    
+    .product-title {
+        font-size: 28px;
+    }
+    
+    .price {
+        font-size: 24px;
+    }
+    
+    .actions {
+        flex-direction: column;
+    }
+    
+    .btn {
+        width: 100%;
+    }
+}
+
+@media (max-width: 576px) {
+    .product-wrapper {
+        padding: 15px;
+        margin: 70px 10px 120px 10px;
+    }
+    
+    .product-main, .reviews-section {
+        padding: 20px;
+    }
+    
+    .product-title {
+        font-size: 24px;
+    }
+    
+    .reviews-section h2 {
+        font-size: 24px;
+    }
 }
