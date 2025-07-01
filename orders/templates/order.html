@@ -14,16 +14,22 @@
 
 {% block content %}
 <main class="checkout-container">
-    {% user_cart request as carts %}
-    {% price_in_order_tag request as price_order %}
-    {% get_order_items_tag request as order_items %}
-    {% amount_in_order_tag request as amount_order%}
+    {% is_single_order request as is_single %}
+
+    {% if not is_single %}
+        {% user_cart request as carts %}
+        {% price_in_order_tag request as price_order %}
+        {% get_order_items_tag request as order_items %}
+        {% amount_in_order_tag request as amount_order %}
+    {% else %}
+        {% get_single_order request as single_order %}
+    {% endif %}
     
     <h1 class="checkout-title">Оформление заказа</h1>
     
     <div class="checkout-content">
         <div class="checkout-form-container">
-            <form method="post" action="{% url "orders:order" %}" class="checkout-form">
+            <form method="post" action="{% if not is_single %}{% url "orders:order" %}{% else %}{% url "orders:single_order" single_order.id %}{% endif %}" class="checkout-form">
                 {% csrf_token %}
                 
                 <div class="form-section">
@@ -114,8 +120,8 @@
                 <h3 class="summary-title">Ваш заказ</h3>
                 
                 <div class="order-items">
+                    {% if not is_single %}
                     {% for prod in order_items %}
-                        {% if prod.in_order %}
                         <div class="order-item">
                             <div class="item-image">
                                 {% if prod.product.image %}
@@ -131,12 +137,30 @@
                                     <span class="item-total">{{ prod.products_price }} ₽</span>
                                 </div>
                             </div>
-                        </div>
-                        {% endif %}
+                        </div> 
                     {% endfor %}
+                    {% else %}
+                    <div class="order-item">
+                            <div class="item-image">
+                                {% if single_order.image %}
+                                <img src="{{ single_order.image.url }}" alt="{{ single_order.name }}">
+                                {% else %}
+                                <img src="{% static 'imgs/default_product.png' %}" alt="Нет изображения">
+                                {% endif %}
+                            </div>
+                            <div class="item-details">
+                                <h4 class="item-name">{{single_order.name }}</h4>
+                                <div class="item-meta">
+                                    <span class="item-price">{{ single_order.price }} ₽ × 1 шт</span>
+                                    <span class="item-total">{{ single_order.price }} ₽</span>
+                                </div>
+                            </div>
+                        </div> 
+                    {% endif %}
                 </div>
                 
                 <div class="summary-totals">
+                    {% if not is_single %}
                     <div class="total-row">
                         <span>Товары ({{ amount_order }}):</span>
                         <span>{{ price_order }} ₽</span>
@@ -149,6 +173,20 @@
                         <span>Итого:</span>
                         <span id="grand-total">{{ price_order }} ₽</span>
                     </div>
+                    {% else %}
+                    <div class="total-row">
+                        <span>Товары (1):</span>
+                        <span>{{ single_order.price }} ₽</span>
+                    </div>
+                    <div class="total-row">
+                        <span>Доставка:</span>
+                        <span id="delivery-cost">0 ₽</span>
+                    </div>
+                    <div class="total-row grand-total">
+                        <span>Итого:</span>
+                        <span id="grand-total">{{ single_order.price }} ₽</span>
+                    </div>
+                    {% endif %}
                 </div>
             </div>
         </div>

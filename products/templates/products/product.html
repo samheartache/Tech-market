@@ -11,8 +11,6 @@
 <script src='{% static "js/ajax.js" %}' defer></script>
 {% endblock js %}
 
-
-
 {% block content %}
 <div class="product-wrapper">
   <div class="product-main">
@@ -40,7 +38,7 @@
                 <button type="submit" class="btn add_to_cart">Добавить в корзину</button>
             </form>
           {% endif %}
-          <a href="#" class="btn order-now">Заказать</a>
+          <a href="{% url "orders:single_order" product.id %}" class="btn order-now">Заказать</a>
         </div>
       </div>
       <div class="product-description">

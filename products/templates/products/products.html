@@ -96,7 +96,7 @@
                   <button type="submit" class="action-button add_to_cart">Добавить в корзину</button>
               </form>
             {% endif %}
-            <a href="#" class="order-button">Заказать</a>
+            <a href="{% url "orders:single_order" product.id %}" class="order-button">Заказать</a>
           </div>
         </div>
       </div>
