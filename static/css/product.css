@@ -296,6 +296,36 @@ textarea {
     text-decoration: underline;
 }
 
+.delete-review-btn {
+    background: #ff4444;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 10px;
+    font-size: 14px;
+    transition: background 0.3s;
+}
+
+.delete-review-btn:hover {
+    background: #cc0000;
+}
+
+.delete-review-btn i {
+    margin-right: 5px;
+}
+
+.already-reviewed {
+    background-color: #f8f9fa;
+    padding: 15px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    text-align: center;
+    color: #6c757d;
+    border: 1px solid #dee2e6;
+}
+
 @media (max-width: 1200px) {
     .product-wrapper {
         margin-left: 250px;

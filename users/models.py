@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.core.validators import MinValueValidator, MaxValueValidator
+from django.db.models import UniqueConstraint
 
 from products.models import Product
 
@@ -30,6 +31,12 @@ class Review(models.Model):
         return f'Отзыв {self.user.username} на товар {self.product.name} | id{self.pk}'
 
     class Meta:
+        constraints = [
+            UniqueConstraint(
+                fields=['user', 'product'],
+                name='unique_user_review_on_product'
+            )
+        ]
         db_table = 'review'
         verbose_name = 'Отзыв'
         verbose_name_plural = 'Отзывы'

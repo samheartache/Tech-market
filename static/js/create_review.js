@@ -4,7 +4,7 @@ $(document).ready(function() {
         
         const form = $(this);
         const url = form.attr("action");
-        const formData = form.serialize()
+        const formData = form.serialize();
 
         $.ajax({
             type: "POST",
@@ -14,7 +14,7 @@ $(document).ready(function() {
                 'X-CSRFToken': $('[name=csrfmiddlewaretoken]').val()
             },
             success: function (data) {
-                const reviewContainer = $(".reviews-list");
+                const reviewContainer = $(".reviews-section");
                 reviewContainer.html(data.reviews_page);
 
                 form.find('textarea').val('');

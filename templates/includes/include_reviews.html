@@ -1,28 +1,70 @@
 {% load static %}
 
-{% if reviews %}
-    {% for review in reviews %}
-        <div class="review">
-            {% if review.user.avatar %}
-            <img src="{{ review.user.avatar.url }}" alt="{{ review.user.username }}" class="review-avatar">
-            {% else %}
-            <img src="{% static 'imgs/default_ava.png' %}" alt="{{ review.user.username }}" class="review-avatar">
-            {% endif %}
-            
-            <div class="review-content">
-                <div class="review-header">
-                    <span class="review-author">{{ review.user.username }}</span>
-                    <span class="review-date">{{ review.time_created|date:"d.m.Y H:i" }}</span>
-                    <div class="review-rating">
-                    {% for i in "12345" %}
-                        <span class="star{% if forloop.counter <= review.rating %} filled{% endif %}">★</span>
-                    {% endfor %}
-                    </div>
+<h2>Отзывы</h2>
+    
+    {% if user.is_authenticated %}
+      {% if not user_has_review %}
+        <div class="add-review">
+            <h3>Оставить отзыв</h3>
+            <form method="post" action="{% url 'user:sendreview' %}">
+                {% csrf_token %}
+                <input type="hidden" name="product_id" value="{{product.id}}">
+                <div class="rating-selector">
+                    <label>Оценка:</label>
+                    <select name="rating">
+                        <option value="5">5 ★</option>
+                        <option value="4">4 ★</option>
+                        <option value="3">3 ★</option>
+                        <option value="2">2 ★</option>
+                        <option value="1">1 ★</option>
+                    </select>
                 </div>
-                <div class="review-text">{{ review.content }}</div>
-            </div>
+                <textarea name="text" placeholder="Ваш отзыв..." maxlength="1000"></textarea>
+                <button type="submit" class="btn submit-review">Отправить отзыв</button>
+            </form>
         </div>
-    {% endfor %}
-{% else %}
-    <p class="no-reviews">Пока нет отзывов. Будьте первым!</p>
-{% endif %}
+      {% else %}
+          <div class="already-reviewed">
+              <p>Вы уже оставили отзыв на этот товар. Удалите его, если хотите написать другой отзыв.</p>
+          </div>
+      {% endif %}
+    {% else %}
+      <p class="login-to-review">Чтобы оставить отзыв, пожалуйста <a href="{% url 'users:login' %}">войдите</a>.</p>
+    {% endif %}
+
+    <div class="reviews-container">
+        <div class="reviews-list">
+            {% if reviews %}
+                {% for review in reviews %}
+                    <div class="review {% if review.user == user %}user-review{% endif %}">
+                        {% if review.user.avatar %}
+                        <img src="{{ review.user.avatar.url }}" alt="{{ review.user.username }}" class="review-avatar">
+                        {% else %}
+                        <img src="{% static 'imgs/default_ava.png' %}" alt="{{ review.user.username }}" class="review-avatar">
+                        {% endif %}
+                        
+                        <div class="review-content">
+                            <div class="review-header">
+                                <span class="review-author">{{ review.user.username }}</span>
+                                <span class="review-date">{{ review.time_created|date:"d.m.Y H:i" }}</span>
+                                <div class="review-rating">
+                                {% for i in "12345" %}
+                                    <span class="star{% if forloop.counter <= review.rating %} filled{% endif %}">★</span>
+                                {% endfor %}
+                                </div>
+                                {% if review.user == user %}
+                                <button class="delete-review-btn" data-review-id="{{ review.id }}" data-delete-url="{% url "users:deletereview" %}">
+                                    {% csrf_token %}
+                                    <i class="fas fa-trash-alt"></i> Удалить
+                                </button>
+                                {% endif %}
+                            </div>
+                            <div class="review-text">{{ review.content }}</div>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p class="no-reviews">Пока нет отзывов. Будьте первым!</p>
+            {% endif %}
+        </div>
+    </div>
