@@ -6,7 +6,7 @@
       {% if not user_has_review %}
         <div class="add-review">
             <h3>Оставить отзыв</h3>
-            <form method="post" action="{% url 'user:sendreview' %}">
+            <form method="post" action="{% url 'reviews:sendreview' %}">
                 {% csrf_token %}
                 <input type="hidden" name="product_id" value="{{product.id}}">
                 <div class="rating-selector">
@@ -53,7 +53,7 @@
                                 {% endfor %}
                                 </div>
                                 {% if review.user == user %}
-                                <button class="delete-review-btn" data-review-id="{{ review.id }}" data-delete-url="{% url "users:deletereview" %}">
+                                <button class="delete-review-btn" data-review-id="{{ review.id }}" data-delete-url="{% url "reviews:deletereview" %}">
                                     {% csrf_token %}
                                     <i class="fas fa-trash-alt"></i> Удалить
                                 </button>

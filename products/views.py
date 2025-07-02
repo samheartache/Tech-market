@@ -3,7 +3,7 @@ from django.db.models import Case, When, Value, IntegerField
 
 from products.utils import query_handler
 from products.models import Category, Product
-from users.models import Review
+from reviews.models import Review
 
 
 class ProductsView(ListView):
