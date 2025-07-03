@@ -1,6 +1,7 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import JsonResponse
 from django.views import View
+from django.views.generic import TemplateView
 from django.template.loader import render_to_string
 
 
@@ -39,3 +40,13 @@ class DeleteReviewView(LoginRequiredMixin, View):
         }
 
         return JsonResponse(response)
+
+
+class UserReviewsView(LoginRequiredMixin, TemplateView):
+    template_name = 'user_reviews.html'
+
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Ваши заказы'
+        context['reviews'] = Review.objects.filter(user=self.request.user)
+        return context

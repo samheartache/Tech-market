@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block css %}
+<link rel='stylesheet' href='{% static "css/user_reviews.css" %}'>
+{% endblock css %}
+
+{% block content %}
+<main class="reviews-wrapper">
+    <div class="reviews-container">
+        <h1 class="reviews-title">Ваши отзывы</h1>
+        
+        {% if reviews %}
+        <div class="reviews-list">
+            {% for review in reviews %}
+            <div class="review-card">
+                <div class="review-product">
+                    <div class="product-image">
+                        {% if review.product.image %}
+                        <img src="{{ review.product.image.url }}" alt="{{ review.product.name }}">
+                        {% else %}
+                        <img src="{% static 'imgs/default_product.png' %}" alt="Нет изображения">
+                        {% endif %}
+                    </div>
+                    <div class="product-info">
+                        <h3><a href="{% url 'products:product' review.product.slug %}">{{ review.product.name }}</a></h3>
+                        <div class="product-meta">
+                            <div class="product-price">{{ review.product.price }} ₽</div>
+                            <div class="review-date">
+                                <i class="fas fa-calendar-alt"></i>
+                                Дата отправки: {{ review.time_created|date:"d.m.Y H:i" }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="review-content">
+                    <div class="review-header">
+                        <div class="review-rating">
+                            {% for i in "12345" %}
+                                {% if forloop.counter <= review.rating %}
+                                <span class="star filled">★</span>
+                                {% else %}
+                                <span class="star">★</span>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                        <div class="review-date">{{ review.created_at|date:"d.m.Y" }}</div>
+                    </div>
+                    
+                    <div class="review-text">
+                        {{ review.content }}
+                    </div>
+                    
+                    <div class="review-actions">
+                        <a href="{% url 'products:product' review.product.slug %}" class="btn btn-edit">Перейти к отзыву</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <div class="no-reviews">
+            <img src="{% static 'imgs/no_reviews.png' %}" alt="Нет отзывов" class="no-reviews-img">
+            <h2>У вас пока нет отзывов</h2>
+            <p>Оставьте свой первый отзыв о товаре!</p>
+            <a href="{% url 'products:products' 'all' %}" class="btn btn-primary">Перейти к товарам</a>
+        </div>
+        {% endif %}
+    </div>
+</main>
+{% endblock content %}

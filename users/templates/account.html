@@ -49,21 +49,21 @@
           </div>
       </div>
     </a>
-    <div class="stat-card">
-      <div class="stat-icon">
-        <svg class="icon" viewBox="0 0 24 24">
-          <path
-            fill="currentColor"
-            d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"
-          />
-        </svg>
+    <a href="{% url "reviews:userreviews" %}">
+      <div class="stat-card">
+        <div class="stat-icon">
+          <svg class="icon" viewBox="0 0 24 24">
+            <path
+              fill="currentColor"
+              d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"
+            />
+          </svg>
+        </div>
+        <div class="stat-content">
+            <h3>Ваши отзывы</h3>
+        </div>
       </div>
-      <a
-        ><div class="stat-content">
-          <h3>Ваши отзывы</h3>
-        </div></a
-      >
-    </div>
+    </a>
   </div>
   <div class="viewed-section">
     <h3 class="section-title">

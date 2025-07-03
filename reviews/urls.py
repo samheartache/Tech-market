@@ -6,5 +6,6 @@ app_name = 'reviews'
 
 urlpatterns = [
     path('sendreview/', views.SendReviewView.as_view(), name='sendreview'),
-    path('deletereview/', views.DeleteReviewView.as_view(), name='deletereview')
+    path('deletereview/', views.DeleteReviewView.as_view(), name='deletereview'),
+    path('userreviews/', views.UserReviewsView.as_view(), name='userreviews')
 ]
