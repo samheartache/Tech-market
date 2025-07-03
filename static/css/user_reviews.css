@@ -191,6 +191,16 @@ body {
     color: #fff;
 }
 
+.btn-delete {
+    background: #ec0a0a;
+    color: #fff;
+}
+
+.btn-delete:hover {
+    background: #a50a0a;
+    transform: scale(1.02);
+}
+
 .review-date {
     display: flex;
     align-items: center;

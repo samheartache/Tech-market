@@ -44,7 +44,7 @@
                     
                     <div class="review-actions">
                         <a href="{% url 'products:product' review.product.slug %}" class="btn btn-edit">Перейти к отзыву</a>
-                        <button class="delete-review-btn" data-review-id="{{ review.id }}" data-delete-url="{% url "reviews:deletereview" %}" data-flag="1">
+                        <button class="delete-review-btn btn btn-delete" data-review-id="{{ review.id }}" data-delete-url="{% url "reviews:deletereview" %}" data-flag="1">
                                     {% csrf_token %}
                                     <i class="fas fa-trash-alt"></i> Удалить
                         </button>
