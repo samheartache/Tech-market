@@ -4,6 +4,7 @@ $(document).ready(function () {
 
         const review_id = $(this).data("review-id");
         const url = $(this).data("delete-url");
+        const flag = $(this).data("flag");
         const csrfToken = $("[name=csrfmiddlewaretoken]").val();
         console.log(review_id)
 
@@ -13,13 +14,21 @@ $(document).ready(function () {
             data: {
                 review_id: review_id,
                 csrfmiddlewaretoken: csrfToken,
+                flag: flag,
             },
             success: function (data) {
-                const reviewContainer = $(".reviews-section");
-                reviewContainer.html(data.reviews_page);
+                if (!data.user_reviews_page) {
+                    const reviewContainer = $(".reviews-section");
+                    reviewContainer.html(data.reviews_page);
 
-                if ($(".review").length === 0) {
-                    $(".reviews-list").html('<p class="no-reviews">Пока нет отзывов. Будьте первым!</p>');
+                    if ($(".review").length === 0) {
+                        $(".reviews-list").html('<p class="no-reviews">Пока нет отзывов. Будьте первым!</p>');
+                    }
+                }
+
+                else {
+                    const reviewContainer = $(".reviews-section");
+                    reviewContainer.html(data.user_reviews_page);
                 }
             }
         });

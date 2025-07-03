@@ -5,13 +5,16 @@ body {
 
 .reviews-wrapper {
     min-height: 100vh;
-    margin: 100px 50px 300px 300px;
-    border-radius: 10px;
     background: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(40px);
     display: flex;
     flex-direction: column;
     align-items: center;
+    max-width: 1500px;
+    margin: 40px auto;
+    margin-top: 100px;
+    padding: 20px;
+    border-radius: 12px;
 }
 
 .reviews-container {
@@ -145,11 +148,8 @@ body {
     font-size: 16px;
     cursor: pointer;
     transition: transform 0.2s, background 0.2s;
-    border: none;
-    text-decoration: none;
     display: inline-block;
     text-align: center;
-    font-family: inherit;
 }
 
 .btn-edit {
@@ -168,20 +168,15 @@ body {
 }
 
 .no-reviews-img {
-    max-width: 200px;
+    max-width: 400px;
     margin-bottom: 20px;
 }
 
 .no-reviews h2 {
     font-size: 24px;
     margin-bottom: 10px;
-    color: #333;
-}
-
-.no-reviews p {
-    color: #666;
+    color: #ffffff;
     margin-bottom: 20px;
-    font-size: 18px;
 }
 
 .btn-primary {

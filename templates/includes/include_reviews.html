@@ -53,7 +53,7 @@
                                 {% endfor %}
                                 </div>
                                 {% if review.user == user %}
-                                <button class="delete-review-btn" data-review-id="{{ review.id }}" data-delete-url="{% url "reviews:deletereview" %}">
+                                <button class="delete-review-btn" data-review-id="{{ review.id }}" data-delete-url="{% url "reviews:deletereview" %}" data-flag="0">
                                     {% csrf_token %}
                                     <i class="fas fa-trash-alt"></i> Удалить
                                 </button>

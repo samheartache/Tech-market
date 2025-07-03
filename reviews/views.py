@@ -29,14 +29,18 @@ class SendReviewView(LoginRequiredMixin, View):
 class DeleteReviewView(LoginRequiredMixin, View):
     def post(self, request, *args, **kwargs):
         review_id = request.POST.get('review_id')
+        is_users_reviews_page = int(request.POST.get('flag'))
 
         review = Review.objects.get(id=review_id)
         product = review.product
         review.delete()
 
         reviews_page = render_to_string('includes/include_reviews.html', context={'reviews': Review.objects.filter(product=product), 'user_has_review': False}, request=request)
+        user_reviews_page = render_to_string('includes/include_user_reviews.html', context={'reviews': Review.objects.filter(user=request.user)}, request=request) if is_users_reviews_page else 0
+
         response = {
             'reviews_page': reviews_page,
+            'user_reviews_page': user_reviews_page,
         }
 
         return JsonResponse(response)
