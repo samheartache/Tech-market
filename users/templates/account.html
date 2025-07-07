@@ -79,7 +79,7 @@
     {% if history %}
     <div class="viewed-products">
       {% for obj in history %}
-      <div class="viewed-product">
+      <div class="viewed-product" title="{{ obj.product.name }}">
         <a href="{% url 'products:product' obj.product.slug %}">
           <div class="viewed-product-image">
             {% if obj.product.image %}
