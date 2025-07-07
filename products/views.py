@@ -1,9 +1,11 @@
+from django.shortcuts import render
 from django.views.generic import DetailView, ListView
 from django.db.models import Case, When, Value, IntegerField
 
 from products.utils import query_handler
 from products.models import Category, Product
 from reviews.models import Review
+from users.models import ViewHistory
 
 
 class ProductsView(ListView):
@@ -47,6 +49,12 @@ class ProductView(DetailView):
     template_name = 'products/product.html'
     slug_url_kwarg = 'product_slug'
     context_object_name = 'product'
+
+    def get(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        if request.user.is_authenticated:
+            ViewHistory.add_to_history(user=request.user, product=self.object)
+        return render(request, self.template_name, self.get_context_data())
 
     def get_object(self, queryset=None):
         product = Product.objects.get(slug=self.kwargs.get(self.slug_url_kwarg))

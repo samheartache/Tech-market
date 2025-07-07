@@ -73,6 +73,35 @@
           d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"
         />
       </svg>
-      Вы смотрели
+      Вы  недавно смотрели
     </h3>
+
+    {% if history %}
+    <div class="viewed-products">
+      {% for obj in history %}
+      <div class="viewed-product">
+        <a href="{% url 'products:product' obj.product.slug %}">
+          <div class="viewed-product-image">
+            {% if obj.product.image %}
+            <img src="{{ obj.product.image.url }}" alt="{{ obj.product.name }}">
+            {% else %}
+            <img src="{% static 'imgs/default_product.png' %}" alt="Нет изображения">
+            {% endif %}
+          </div>
+          <div class="viewed-product-info">
+            <h4>{{ obj.product.name }}</h4>
+            <div class="viewed-product-price">{{ obj.product.price }} ₽</div>
+          </div>
+        </a>
+      </div>
+      {% endfor %}
+    </div>
+    {% else %}
+    <div class="no-viewed">
+      <p>Вы пока не просматривали товары</p>
+      <a href="{% url 'products:products' 'all' %}" class="btn btn-primary">Перейти к товарам</a>
+    </div>
+    {% endif %}
+  </div>
+</div>
 {% endblock %}

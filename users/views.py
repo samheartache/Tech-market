@@ -8,6 +8,7 @@ from django.contrib.auth.views import LoginView
 from django.views.generic import CreateView, TemplateView, UpdateView
 
 from users.forms import LoginForm, SignUpForm, EditProfileForm
+from users.utils import get_viewed_products
 from cart.models import Cart
 
 
@@ -69,6 +70,8 @@ class UserAccount(LoginRequiredMixin, TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Мой аккаунт'
+        context['history'] = get_viewed_products(request=self.request)
+        return context
 
 
 class UserEdit(LoginRequiredMixin, UpdateView):
