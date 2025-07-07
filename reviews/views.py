@@ -51,6 +51,6 @@ class UserReviewsView(LoginRequiredMixin, TemplateView):
 
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['title'] = 'Ваши заказы'
+        context['title'] = 'Ваши отзывы'
         context['reviews'] = Review.objects.filter(user=self.request.user)
         return context

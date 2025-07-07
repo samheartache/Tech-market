@@ -39,7 +39,7 @@
                                         <img src="{{ order_product.product.image.url }}" alt="Товар">
                                     </div>
                                     <div class="item-details">
-                                        <h4 class="item-name">{{ order_product.name }}</h4>
+                                        <a class="product-link" href="{% url "products:product" order_product.product.slug %}"><h4 class="item-name">{{ order_product.name }}</h4></a>
                                         <div class="item-meta">
                                             <span class="item-price">{{ order_product.price }} ₽ × {{ order_product.quantity }}</span>
                                         </div>
