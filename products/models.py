@@ -7,7 +7,8 @@ class Product(models.Model):
     description = models.TextField(default='У товара пока нет описания', blank=True, null=True, max_length=500, verbose_name='Описание')
     price = models.DecimalField(default=0.0, max_digits=10, decimal_places=2, verbose_name='Цена')
     image = models.ImageField(upload_to='product_img', blank=True, null=True, verbose_name='Изображение')
-    category = models.ForeignKey('Category', verbose_name='Категория', on_delete=models.CASCADE)
+    category = models.ForeignKey(to='Category', verbose_name='Категория', on_delete=models.CASCADE)
+    average_rating = models.IntegerField(verbose_name='Средняя оценка товара', default=0)
     
     def __str__(self):
         return self.name

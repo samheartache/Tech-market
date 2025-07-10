@@ -8,7 +8,7 @@
             <h3>Оставить отзыв</h3>
             <form method="post" action="{% url 'reviews:sendreview' %}">
                 {% csrf_token %}
-                <input type="hidden" name="product_id" value="{{product.id}}">
+                <input type="hidden" name="product_id" value="{{ product.id }}">
                 <div class="rating-selector">
                     <label>Оценка:</label>
                     <select name="rating">
