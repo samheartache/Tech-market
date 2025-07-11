@@ -8,7 +8,6 @@ class Product(models.Model):
     price = models.DecimalField(default=0.0, max_digits=10, decimal_places=2, verbose_name='Цена')
     image = models.ImageField(upload_to='product_img', blank=True, null=True, verbose_name='Изображение')
     category = models.ForeignKey(to='Category', verbose_name='Категория', on_delete=models.CASCADE)
-    average_rating = models.IntegerField(verbose_name='Средняя оценка товара', default=0)
     
     def __str__(self):
         return self.name
@@ -18,6 +17,14 @@ class Product(models.Model):
         verbose_name = 'Товар'
         verbose_name_plural = 'Товары'
         ordering = ['id']
+
+    @property
+    def average_rating(self):
+        from reviews.models import Review
+        ratings = Review.objects.filter(product=self).values_list('rating', flat=True)
+        if ratings:
+            return round(sum(ratings) / len(ratings), 1)
+        return 0
 
 
 class Category(models.Model):

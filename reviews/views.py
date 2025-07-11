@@ -23,16 +23,6 @@ class SendReviewView(LoginRequiredMixin, View):
             'reviews_page': reviews_page,
         }
 
-        # Updating average rating of certain product
-
-        all_ratings = Review.objects.filter(product=reviewed_product).values_list('rating', flat=True)
-        ratings_quantity = len(all_ratings) + 1
-        ratings_sum = sum(all_ratings) + int(rating)
-        average_rating = ratings_sum // ratings_quantity
-
-        Product.objects.filter(name=reviewed_product.name).update(average_rating=average_rating)
-
-
         return JsonResponse(response)
 
 
@@ -53,15 +43,6 @@ class DeleteReviewView(LoginRequiredMixin, View):
             'reviews_page': reviews_page,
             'user_reviews_page': user_reviews_page,
         }
-
-        # Updating average rating of certain product
-
-        all_ratings = Review.objects.filter(product=reviewed_product).values_list('rating', flat=True)
-        ratings_quantity = len(all_ratings)
-        ratings_sum = sum(all_ratings)
-        average_rating = ratings_sum // ratings_quantity
-
-        Product.objects.filter(name=reviewed_product.name).update(average_rating=average_rating)
 
         return JsonResponse(response)
 
