@@ -234,6 +234,23 @@ section:hover {
     border-color: #0d8dd7;
 }
 
+/* .review-rating {
+    margin: 1.5em;
+} */
+
+.review-rating span {
+    font-size: 30px;
+}
+
+.star {
+    color: #ddd;
+    font-size: 30px;
+}
+
+.star.filled {
+    color: #ffb703;
+}
+
 @media (max-width: 1200px) {
     .product_name {
         font-size: 24px;

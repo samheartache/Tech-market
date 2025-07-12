@@ -21,6 +21,7 @@ class Product(models.Model):
     @property
     def average_rating(self):
         from reviews.models import Review
+        
         ratings = Review.objects.filter(product=self).values_list('rating', flat=True)
         if ratings:
             return round(sum(ratings) / len(ratings), 1)
