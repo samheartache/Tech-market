@@ -80,7 +80,7 @@
           </a>
         </div>
             {% if product.average_rating %}
-              <div class="review-rating">
+              <div class="average-rating">
                 <span> Рейтинг: </span>
                   {% for i in "12345" %}
                   <span class="star{% if forloop.counter <= product.average_rating %} filled{% endif %}">★</span>

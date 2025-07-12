@@ -25,6 +25,14 @@
       <h1 class="product-title">{{ product.name }}</h1>
       <div class="product-meta">
         <div class="price">{{ product.price }} ₽</div>
+        {% if product.average_rating %}
+              <div class="average-rating">
+                <span> Рейтинг: </span>
+                  {% for i in "12345" %}
+                  <span class="av_star{% if forloop.counter <= product.average_rating %} filled{% endif %}">★</span>
+                  {% endfor %}
+              </div>
+        {% endif %}
         <div class="actions">
           {% is_in_cart product.id user.id as in_cart %}
           {% if in_cart %}

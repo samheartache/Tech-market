@@ -234,11 +234,7 @@ section:hover {
     border-color: #0d8dd7;
 }
 
-/* .review-rating {
-    margin: 1.5em;
-} */
-
-.review-rating span {
+.average-rating span {
     font-size: 30px;
 }
 
