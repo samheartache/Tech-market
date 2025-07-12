@@ -1,0 +1,10 @@
+{% load static %}
+
+{% if product.average_rating %}
+              <div class="average-rating">
+                <span> Рейтинг: </span>
+                  {% for i in "12345" %}
+                  <span class="av_star{% if forloop.counter <= product.average_rating %} filled{% endif %}">★</span>
+                  {% endfor %}
+              </div>
+{% endif %}

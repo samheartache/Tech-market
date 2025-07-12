@@ -19,6 +19,9 @@ $(document).ready(function () {
             success: function (data) {
                 if (!data.user_reviews_page) {
                     const reviewContainer = $(".reviews-section");
+                    const averageRating = $(".include-rating-block");
+
+                    averageRating.html(data.average_rating_block);
                     reviewContainer.html(data.reviews_page);
 
                     if ($(".review").length === 0) {

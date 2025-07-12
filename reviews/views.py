@@ -19,8 +19,11 @@ class SendReviewView(LoginRequiredMixin, View):
         Review.objects.create(content=review, rating=rating, user=user, product=reviewed_product)
 
         reviews_page = render_to_string('includes/include_reviews.html', context={'reviews': Review.objects.filter(product=reviewed_product), 'user_has_review': True}, request=request)
+        average_rating_block = render_to_string('includes/product_rating.html', context={'product': reviewed_product}, request=request)
+
         response = {
             'reviews_page': reviews_page,
+            'average_rating_block': average_rating_block,
         }
 
         return JsonResponse(response)
@@ -38,10 +41,12 @@ class DeleteReviewView(LoginRequiredMixin, View):
 
         reviews_page = render_to_string('includes/include_reviews.html', context={'reviews': Review.objects.filter(product=reviewed_product), 'user_has_review': False, 'product': reviewed_product}, request=request)
         user_reviews_page = render_to_string('includes/include_user_reviews.html', context={'reviews': Review.objects.filter(user=request.user)}, request=request) if is_users_reviews_page else 0
+        average_rating_block = render_to_string('includes/product_rating.html', context={'product': reviewed_product}, request=request)
 
         response = {
             'reviews_page': reviews_page,
             'user_reviews_page': user_reviews_page,
+            'average_rating_block': average_rating_block,
         }
 
         return JsonResponse(response)

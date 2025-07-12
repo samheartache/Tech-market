@@ -15,7 +15,10 @@ $(document).ready(function() {
             },
             success: function (data) {
                 const reviewContainer = $(".reviews-section");
+                const averageRating = $(".include-rating-block")
+
                 reviewContainer.html(data.reviews_page);
+                averageRating.html(data.average_rating_block)
 
                 form.find('textarea').val('');
                 form.find('select').val('5');
