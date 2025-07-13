@@ -28,41 +28,27 @@
     <p>Наша служба поддержки всегда на связи</p>
   </div>
 </section>
-<section class="best_products">
-  <h2>Лучшие товары</h2>
-  <div class="products_grid">
-    <div class="product_card">
-      <div class="product_image">
-        <img src="media/product_img/mon5.jpg" alt="Монитор" />
-      </div>
-      <div class="else">
-        <h3>Монитор MSI MAG</h3>
-        <p>82 499 ₽</p>
-        <button>Заказать</button>
-      </div>
+{% if best_products %}
+
+  <section class="best_products">
+    <h2>Лучшие товары</h2>
+    <div class="products_grid">
+
+      {% for product in best_products %}
+        <div class="product_card">
+          <div class="product_image">
+            <img src="{{ product.image.url }}" alt="Монитор" />
+          </div>
+          <div class="else">
+            <a href="{% url "products:product" product.slug %}"><h3>{{ product.name }}</h3></a>
+            <p>{{ product.price }} ₽</p>
+            <a href="{% url "orders:single_order" product.id %}"><button>Заказать</button></a>
+          </div>
+        </div>
+      {% endfor %}
     </div>
-    <div class="product_card">
-      <div class="product_image">
-        <img src="media/product_img/mboard2.jpg" alt="Материнская плата" />
-      </div>
-      <div class="else">
-        <h3>Материнская плата X870E</h3>
-        <p>69 999 ₽</p>
-        <button>Заказать</button>
-      </div>
-    </div>
-    <div class="product_card">
-      <div class="product_image">
-        <img src="media/product_img/proc3.jpg" alt="Процессор" />
-      </div>
-      <div class="else">
-        <h3>Процессор AMD Ryzen 7</h3>
-        <p>53 499 ₽</p>
-        <button>Заказать</button>
-      </div>
-    </div>
-  </div>
-</section>
+  </section>
+{% endif %}
 <footer>
   <div class="footer_content">
     <p>© 2025 TECH MARKET</p>

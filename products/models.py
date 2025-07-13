@@ -1,4 +1,10 @@
 from django.db import models
+from django.db.models import Avg
+
+
+class ProductQuerySet(models.QuerySet):
+    def get_best_products(self):
+        return self.annotate(avg_rating=Avg('review__rating')).filter(avg_rating__isnull=False).order_by('-avg_rating')[:3]
 
 
 class Product(models.Model):
@@ -17,6 +23,8 @@ class Product(models.Model):
         verbose_name = 'Товар'
         verbose_name_plural = 'Товары'
         ordering = ['id']
+    
+    objects = ProductQuerySet.as_manager()
 
     @property
     def average_rating(self):
